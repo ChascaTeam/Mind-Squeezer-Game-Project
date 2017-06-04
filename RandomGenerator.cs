@@ -10,5 +10,15 @@ namespace MindSqueeze.App
         {
             return random.Next(maxNumber);
         }
+
+        public static int GetRandomNumber(int maxNumber, int numberToOmit)
+        {
+            int randomNum = random.Next(maxNumber);
+            while (randomNum == numberToOmit)
+            {
+                randomNum = random.Next(maxNumber);
+            }
+            return randomNum;
+        }
     }
 }
