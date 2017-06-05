@@ -107,11 +107,36 @@
             {
                 matrix = RotateMatrixThreeTimes(matrix);
             }
+
+            PrintMatrix(matrix, rotationType, rows, cols);
+
+            this.Answer = currentWord;
+
         }
 
         public override bool IsCorrectAnswer(string answer)
         {
-            return base.IsCorrectAnswer(answer);
+            return this.Answer.ToLower().Equals(answer.ToLower()) && answer.Length != 0;
+        }
+
+        private static void PrintMatrix(char[][] matrix, int rotationType, int rows, int cols)
+        {
+            if (rotationType == 1 || rotationType == 3)
+            {
+                for (int currRow = 0; currRow < cols; currRow++)
+                {
+                    Console.WriteLine(string.Join(" ", matrix[currRow]));
+                }
+            }
+            else
+            {
+                for (int currRow = 0; currRow < rows; currRow++)
+                {
+                    Console.WriteLine(string.Join(" ", matrix[currRow]));
+                }
+            }
+
+            Console.WriteLine();
         }
 
         private static char[][] RotateMatrixThreeTimes(char[][] matrix)
