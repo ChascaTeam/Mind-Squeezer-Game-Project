@@ -55,11 +55,106 @@
             Random random = new Random();
             int wordIndex = random.Next(0, words.Length - 1);
             int count = 0;
+
+            // Checking the length of the word
+            string currentWord = words[wordIndex];
+
+            if (currentWord.Length == 4)
+            {
+                if (count % 3 == 0)
+                {
+                    InsertWordInFirstColumn(matrix, currentWord);
+                }
+                else if (count % 3 == 1)
+                {
+                    InsertWordInLastColumn(matrix, currentWord);
+                }
+                else if (count % 3 == 2)
+                {
+                    InsertWordInDiagonal(matrix, currentWord);
+                }
+
+                count++;
+            }
+            else if (currentWord.Length == 5)
+            {
+                if (count % 2 != 0)
+                {
+                    InsertWordInTopRow(matrix, currentWord);
+                }
+                else if (count % 2 == 0)
+                {
+                    InsertWordInBottomRow(matrix, currentWord);
+                }
+
+                count++;
+            }
+
+            FillingTheRestPartOfTheMatrix(matrix, alphabet);
         }
 
         public override bool IsCorrectAnswer(string answer)
         {
             return base.IsCorrectAnswer(answer);
+        }
+
+        private static void FillingTheRestPartOfTheMatrix(char[][] matrix, char[] alphabet)
+        {
+            Random random = new Random();
+
+            for (int currRow = 0; currRow < matrix.Length; currRow++)
+            {
+                for (int currCol = 0; currCol < matrix[0].Length; currCol++)
+                {
+                    char currElement = matrix[currRow][currCol];
+
+                    if (currElement == 0)
+                    {
+                        int letterIndex = random.Next(0, alphabet.Length - 1);
+                        matrix[currRow][currCol] = alphabet[letterIndex];
+                    }
+                }
+            }
+        }
+
+        private static void InsertWordInDiagonal(char[][] matrix, string currentWord)
+        {
+            for (int currRow = 0; currRow < matrix.Length; currRow++)
+            {
+                matrix[currRow][currRow] = currentWord[currRow];
+            }
+        }
+
+        private static void InsertWordInLastColumn(char[][] matrix, string currentWord)
+        {
+            for (int currRow = 0; currRow < matrix.Length; currRow++)
+            {
+                matrix[currRow][matrix[0].Length - 1] = currentWord[currRow];
+            }
+        }
+
+        private static void InsertWordInFirstColumn(char[][] matrix, string currentWord)
+        {
+            for (int currRow = 0; currRow < matrix.Length; currRow++)
+            {
+                matrix[currRow][0] = currentWord[currRow];
+            }
+        }
+
+        private static void InsertWordInBottomRow(char[][] matrix, string currentWord)
+        {
+            for (int currCol = 0; currCol < matrix[matrix.Length - 1].Length; currCol++)
+            {
+                matrix[matrix.Length - 1][currCol] = currentWord[currCol];
+            }
+        }
+
+        private static void InsertWordInTopRow(char[][] matrix, string currentWord)
+        {
+            for (int currCol = 0; currCol < matrix[0].Length; currCol++)
+            {
+                matrix[0][currCol] = currentWord[currCol];
+            }
         }
     }
 }
