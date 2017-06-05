@@ -91,11 +91,89 @@
             }
 
             FillingTheRestPartOfTheMatrix(matrix, alphabet);
+
+            // Choosing rotation type
+            int rotationType = random.Next(1, 4);
+
+            if (rotationType == 1)
+            {
+                matrix = RotateMatrixOneTime(matrix);
+            }
+            else if (rotationType == 2)
+            {
+                matrix = RotateMatrixTwoTimes(matrix);
+            }
+            else if (rotationType == 3)
+            {
+                matrix = RotateMatrixThreeTimes(matrix);
+            }
         }
 
         public override bool IsCorrectAnswer(string answer)
         {
             return base.IsCorrectAnswer(answer);
+        }
+
+        private static char[][] RotateMatrixThreeTimes(char[][] matrix)
+        {
+            char[][] rotatedMatrix = new char[matrix[0].Length][];
+
+            int row = 0;
+
+            for (int currCol = matrix[0].Length - 1; currCol >= 0; currCol--)
+            {
+                rotatedMatrix[row] = new char[matrix.Length];
+                int col = 0;
+
+                for (int currRow = 0; currRow < matrix.Length; currRow++)
+                {
+                    rotatedMatrix[row][col] = matrix[currRow][currCol];
+                    col++;
+                }
+
+                row++;
+            }
+
+            return rotatedMatrix;
+        }
+
+        private static char[][] RotateMatrixTwoTimes(char[][] matrix)
+        {
+            char[][] rotatedMatrix = new char[matrix.Length][];
+
+            int row = 0;
+
+            for (int currRow = matrix.Length - 1; currRow >= 0; currRow--)
+            {
+                rotatedMatrix[row] = matrix[currRow].Reverse().ToArray();
+                row++;
+            }
+
+            return rotatedMatrix;
+        }
+
+        private static char[][] RotateMatrixOneTime(char[][] matrix)
+        {
+            char[][] rotatedMatrix = new char[matrix[0].Length][];
+
+            int row = 0;
+
+            for (int currCol = 0; currCol < matrix[0].Length; currCol++)
+            {
+                rotatedMatrix[currCol] = new char[matrix.Length];
+                int col = 0;
+
+                for (int currRow = matrix.Length - 1; currRow >= 0; currRow--)
+                {
+                    char currElement = matrix[currRow][currCol];
+                    rotatedMatrix[row][col] = currElement;
+                    col++;
+                }
+
+                row++;
+            }
+
+            return rotatedMatrix;
         }
 
         private static void FillingTheRestPartOfTheMatrix(char[][] matrix, char[] alphabet)
