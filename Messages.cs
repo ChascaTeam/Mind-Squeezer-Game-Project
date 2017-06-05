@@ -14,7 +14,7 @@
 
         public const string QuestionTypeColorGuess = "What color is the word?";
 
-        public const string MathMatrixEquationCoordinates = "What are the coordinates of the result of the equation {0}?\nExample answer: A 5";
+        public const string MathMatrixEquationCoordinates = "Locate the coordinates of X in the equation:";
 
         public const string QuestionTypeFindWordInMatrix = "Find four or five letter word: ";
 
