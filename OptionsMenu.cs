@@ -21,6 +21,10 @@ namespace MindSqueeze.App
             {
                 //TODO
             }
+            else if (response == "Quit")
+            {
+                Environment.Exit(0);
+            }
             else
             {
                 Console.WriteLine(Messages.WrongInput);               

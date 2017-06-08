@@ -13,7 +13,7 @@ namespace MindSqueezer.Questions
             this.QuestionText = questionText;
         }
         public ReadSentenceInMatrixQuestion()
-            : this(Messages.QuestionTypeColorGuess)
+            : this(Messages.QuestionTypeReadSentenceInMatrix)
         {
         }
 

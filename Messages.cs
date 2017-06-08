@@ -2,7 +2,7 @@
 {
     public static class Messages
     {
-        public const string EntryMsg = "Welcome Write \"Start\""; //TODO
+        public const string EntryMsg = "Welcome Write \"Start\" or \"Quit\""; //TODO
     
         public const string Info = "Info"; //TODO
 
@@ -17,6 +17,8 @@
         public const string MathMatrixEquationCoordinates = "Locate the coordinates of X in the equation:";
 
         public const string QuestionTypeFindWordInMatrix = "Find four or five letter word: ";
+
+        public const string QuestionTypeReadSentenceInMatrix = "Unwrap the sentence: ";
 
         public const string EndMsg = "Game Over!";
         

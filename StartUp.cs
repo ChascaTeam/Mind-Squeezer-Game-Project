@@ -11,35 +11,39 @@ namespace MindSqueeze.App
 
             Writer.WriteMessageOnNewLine(Messages.EntryMsg);
 
-            OptionsMenu.Menu();
-            var totalScore = 0;
-            
-            while (true) 
+            while (true)
             {
-                Console.Clear();
+                OptionsMenu.Menu();
+                
+                var totalScore = 0;
 
-                Question quest = Activator.CreateInstance(Type.GetType(Question.GetRandomQuestionType())) as Question;
-
-                Writer.WriteMessageOnNewLine(quest.QuestionText);
-
-                quest.GenerateQuestion();
-
-                if(!quest.IsCorrectAnswer(Console.ReadLine()))
+                while (true)
                 {
-                    Console.WriteLine("wrong");
-                    break;
+                    Console.Clear();
+
+                    Question quest =
+                        Activator.CreateInstance(Type.GetType(Question.GetRandomQuestionType())) as Question;
+
+                    Writer.WriteMessageOnNewLine(quest.QuestionText);
+
+                    quest.GenerateQuestion();
+
+                    if (!quest.IsCorrectAnswer(Console.ReadLine()))
+                    {
+                        Console.WriteLine("wrong");
+                        break;
+                    }
+
+                    totalScore = Score.Add(totalScore);
+
+                    Writer.WriteMessageOnNewLine(Messages.RightInput);
                 }
 
-                totalScore = Score.Add(totalScore);
+                Writer.WriteMessageOnNewLine(Messages.EndMsg);
+                //CheckIfTopScore(totalScore);
 
-                Writer.WriteMessageOnNewLine(Messages.RightInput);
+                totalScore = 0;                            
             }
-
-            Writer.WriteMessageOnNewLine(Messages.EndMsg);
-            //CheckIfTopScore(totalScore);
-
-            totalScore = 0;
-            OptionsMenu.Menu();
         }
     }
 }
