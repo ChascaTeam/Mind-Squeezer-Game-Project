@@ -11,13 +11,20 @@ namespace MindSqueeze.App
             return random.Next(maxNumber);
         }
 
-        public static int GetRandomNumber(int maxNumber, int numberToOmit)
+        public static int GetRandomNumber(int minNumber, int maxNumber)
         {
-            int randomNum = random.Next(maxNumber);
-            while (randomNum == numberToOmit)
+            return random.Next(minNumber, maxNumber);
+        }
+
+        public static int GetRandomNumber(int minNumber, int maxNumber, int numberToOmit)
+        {
+            int randomNum;
+
+            do
             {
                 randomNum = random.Next(maxNumber);
-            }
+            } while (randomNum == numberToOmit);
+
             return randomNum;
         }
     }

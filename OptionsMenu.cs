@@ -6,7 +6,7 @@ namespace MindSqueeze.App
     {
         public static void Menu()
         {
-            
+            Writer.WriteMessageOnNewLine(Messages.MainMenu);
             string response = Reader.ReadLine();
 
             if(response == "Info")

@@ -1,10 +1,15 @@
 ﻿using System;
-using System.Linq;
+using MindSqueeze.App;
 
-namespace MindSqueeze.App.Questions
+namespace MindSqueezer.Questions
 {
     public class ColorQuestion : Question
     {
+        private static readonly string[] colors = new string[]
+        {
+            "Gray", "White", "Yellow", "Green", "Blue", "Red"
+        };
+
         public ColorQuestion(string questionText)
         {
             this.QuestionText = questionText;
@@ -18,13 +23,11 @@ namespace MindSqueeze.App.Questions
         {
             var curColor = Console.ForegroundColor;
 
-            this.Answer = Enum.GetName(typeof(ConsoleColor),
-                RandomGenerator.GetRandomNumber(Enum.GetValues(typeof(ConsoleColor)).Length));
+            this.Answer = colors[RandomGenerator.GetRandomNumber(colors.Length)];
 
             Console.ForegroundColor = (ConsoleColor) Enum.Parse(typeof(ConsoleColor), this.Answer);
 
-            Writer.WriteMessageOnNewLine(Enum.GetName(typeof(ConsoleColor),
-                RandomGenerator.GetRandomNumber(Enum.GetValues(typeof(ConsoleColor)).Length)));
+            Writer.WriteMessageOnNewLine(colors[RandomGenerator.GetRandomNumber(colors.Length)]);
 
             Console.ForegroundColor = curColor;
         }

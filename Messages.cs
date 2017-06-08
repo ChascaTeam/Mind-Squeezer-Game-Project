@@ -1,9 +1,17 @@
-﻿namespace MindSqueeze.App
+﻿using System;
+
+namespace MindSqueeze.App
 {
     public static class Messages
     {
-        public const string EntryMsg = "Welcome Write \"Start\" or \"Quit\""; //TODO
-    
+        public const string EntryMsg = "Welcome!"; //TODO
+
+        public const string MainMenu = "Choose menu option:" +
+                                       "\n- Start" +
+                                       "\n- Info" +
+                                       "\n- HighScores" +
+                                       "\n- Quit";
+
         public const string Info = "Info"; //TODO
 
         //TODO

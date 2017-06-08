@@ -52,8 +52,7 @@
             }
 
             // Choosing random word from the array
-            Random random = new Random();
-            int wordIndex = random.Next(0, words.Length - 1);
+            int wordIndex = RandomGenerator.GetRandomNumber(words.Length);
             int count = 0;
 
             // Checking the length of the word
@@ -93,7 +92,7 @@
             FillingTheRestPartOfTheMatrix(matrix, alphabet);
 
             // Choosing rotation type
-            int rotationType = random.Next(1, 4);
+            int rotationType = RandomGenerator.GetRandomNumber(1, 4);
 
             if (rotationType == 1)
             {
@@ -203,8 +202,6 @@
 
         private static void FillingTheRestPartOfTheMatrix(char[][] matrix, char[] alphabet)
         {
-            Random random = new Random();
-
             for (int currRow = 0; currRow < matrix.Length; currRow++)
             {
                 for (int currCol = 0; currCol < matrix[0].Length; currCol++)
@@ -213,7 +210,7 @@
 
                     if (currElement == 0)
                     {
-                        int letterIndex = random.Next(0, alphabet.Length - 1);
+                        int letterIndex = RandomGenerator.GetRandomNumber(0, alphabet.Length - 1);
                         matrix[currRow][currCol] = alphabet[letterIndex];
                     }
                 }

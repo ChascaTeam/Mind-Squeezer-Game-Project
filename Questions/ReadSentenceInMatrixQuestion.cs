@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MindSqueeze.App;
+using MindSqueezer.Enums;
 
 namespace MindSqueezer.Questions
 {
@@ -100,8 +101,7 @@ namespace MindSqueezer.Questions
 
         private static char[][] MatrixType(string[] sentence, char[][] matrix)
         {
-            Random random = new Random();
-            int randomMatrixType = random.Next(0, 7);
+            SentenceInMatrixType randomMatrixType = (SentenceInMatrixType) RandomGenerator.GetRandomNumber(Enum.GetValues(typeof(SentenceInMatrixType)).Length);
 
             // all types fill the matrix in zig-zag form
             // Matrix Name|      matrix start - matrix end         | zig-zag direction|
@@ -114,35 +114,35 @@ namespace MindSqueezer.Questions
             // ThirdType 0 - takes from bottom left to top left     (left&right)
             // ThirdType 1 - takes from bottom right to top right   (left&right)
 
-            if (randomMatrixType == 0)
+            if (randomMatrixType == SentenceInMatrixType.TopLeftRight)
             {
                 matrix = FirstType(sentence, matrix, 0);
             }
-            else if (randomMatrixType == 1)
+            else if (randomMatrixType == SentenceInMatrixType.BottomLeftRight)
             {
                 matrix = FirstType(sentence, matrix, 1);
             }
-            else if (randomMatrixType == 2)
+            else if (randomMatrixType == SentenceInMatrixType.TopRightLeft)
             {
                 matrix = SecondType(sentence, matrix, 0);
             }
-            else if (randomMatrixType == 3)
+            else if (randomMatrixType == SentenceInMatrixType.BottomRightLeft)
             {
                 matrix = SecondType(sentence, matrix, 1);
             }
-            else if (randomMatrixType == 4)
+            else if (randomMatrixType == SentenceInMatrixType.TopLeftBottomLeft)
             {
                 matrix = ThirdType(sentence, matrix, 0);
             }
-            else if (randomMatrixType == 5)
+            else if (randomMatrixType == SentenceInMatrixType.TopRightBottomRight)
             {
                 matrix = ThirdType(sentence, matrix, 1);
             }
-            else if (randomMatrixType == 6)
+            else if (randomMatrixType == SentenceInMatrixType.BottomLeftTopLeft)
             {
                 matrix = FourthType(sentence, matrix, 0);
             }
-            else if (randomMatrixType == 7)
+            else if (randomMatrixType == SentenceInMatrixType.BottomRightTopRight)
             {
                 matrix = FourthType(sentence, matrix, 1);
             }

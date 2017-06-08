@@ -1,9 +1,8 @@
 ﻿using System;
-using MindSqueeze.App.Questions;
 
 namespace MindSqueeze.App
 {
-    class Program
+    class StartUp
     {
         static void Main(string[] args)
         {
@@ -38,11 +37,10 @@ namespace MindSqueeze.App
 
                     Writer.WriteMessageOnNewLine(Messages.RightInput);
                 }
-
+                
+                Console.Clear();
                 Writer.WriteMessageOnNewLine(Messages.EndMsg);
                 //CheckIfTopScore(totalScore);
-
-                totalScore = 0;                            
             }
         }
     }
