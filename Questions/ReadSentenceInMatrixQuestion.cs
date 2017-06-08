@@ -25,40 +25,15 @@ namespace MindSqueezer.Questions
             // Creates char matrix
             char[][] matrix = Matrix();
 
-            // Choose matrix type
-            Random random = new Random();
-            int randomMatrixType = random.Next(0, 3);
+            // Choose matrix type & fill it with the sentence
+            matrix = MatrixType(sentence, matrix);
 
-            // all types fill the matrix in zig-zag form
-            // FirstType - 0 takes from top left to top right (up&down)
-            // FirstType - 1 takes from bottom left to bottom right (down&up)
-            // SecondType - 0 takes from top right to top left (up&down)
-            // SecondType - 1 takes from bottom right to bottom left (down&up)
+            PrintMatrix(matrix);
 
-            if (randomMatrixType == 0)
-            {
-                matrix = FirstType(sentence, matrix, 0);
-            }
-            else if (randomMatrixType == 1)
-            {
-                matrix = FirstType(sentence, matrix, 1);
-            }
-            else if (randomMatrixType == 2)
-            {
-                matrix = SecondType(sentence, matrix, 0);
-            }
-            else if (randomMatrixType == 3)
-            {
-                matrix = SecondType(sentence, matrix, 1);
-            }
-            foreach (var row in matrix)
-            {
-                Console.WriteLine(string.Join("", row));
-            }
-
+            this.Answer = string.Join(" ", sentence);
         }
 
-        public static string[] Sentence()
+        private static string[] Sentence()
         {
             Console.WriteLine();
 
@@ -110,7 +85,7 @@ namespace MindSqueezer.Questions
             return sentence;
         }
 
-        public static char[][] Matrix()
+        private static char[][] Matrix()
         {
             int rows = 6;
             int cols = 5;
@@ -123,18 +98,59 @@ namespace MindSqueezer.Questions
             return matrix;
         }
 
-        public static Queue<char> Queue(string[] sentence)
+        private static char[][] MatrixType(string[] sentence, char[][] matrix)
         {
-            string matrixSentence = string.Join("", sentence);
-            Queue<char> queue = new Queue<char>();
-            foreach (var letter in matrixSentence)
+            Random random = new Random();
+            int randomMatrixType = random.Next(0, 7);
+
+            // all types fill the matrix in zig-zag form
+            // Matrix Name|      matrix start - matrix end         | zig-zag direction|
+            // FirstType 0 - takes from top left to top right       (up&down)
+            // FirstType 1 - takes from bottom left to bottom right (down&up)
+            // SecondType 0 - takes from top right to top left      (up&down)
+            // SecondType 1 - takes from bottom right to bottom left (down&up)
+            // ThirdType 0 - takes from top left to bottom left     (left&right)
+            // ThirdType 1 - takes from top right to bottom right   (left&right)
+            // ThirdType 0 - takes from bottom left to top left     (left&right)
+            // ThirdType 1 - takes from bottom right to top right   (left&right)
+
+            if (randomMatrixType == 0)
             {
-                queue.Enqueue(letter);
+                matrix = FirstType(sentence, matrix, 0);
             }
-            return queue;
+            else if (randomMatrixType == 1)
+            {
+                matrix = FirstType(sentence, matrix, 1);
+            }
+            else if (randomMatrixType == 2)
+            {
+                matrix = SecondType(sentence, matrix, 0);
+            }
+            else if (randomMatrixType == 3)
+            {
+                matrix = SecondType(sentence, matrix, 1);
+            }
+            else if (randomMatrixType == 4)
+            {
+                matrix = ThirdType(sentence, matrix, 0);
+            }
+            else if (randomMatrixType == 5)
+            {
+                matrix = ThirdType(sentence, matrix, 1);
+            }
+            else if (randomMatrixType == 6)
+            {
+                matrix = FourthType(sentence, matrix, 0);
+            }
+            else if (randomMatrixType == 7)
+            {
+                matrix = FourthType(sentence, matrix, 1);
+            }
+
+            return matrix;
         }
 
-        public static char[][] FirstType(string[] sentence, char[][] matrix, int direction)
+        private static char[][] FirstType(string[] sentence, char[][] matrix, int direction)
         {
             Queue<char> matrixFiller = Queue(sentence);
 
@@ -161,7 +177,8 @@ namespace MindSqueezer.Questions
 
             return matrix;
         }
-        public static char[][] SecondType(string[] sentence, char[][] matrix, int direction)
+
+        private static char[][] SecondType(string[] sentence, char[][] matrix, int direction)
         {
             Queue<char> matrixFiller = Queue(sentence);
 
@@ -185,8 +202,86 @@ namespace MindSqueezer.Questions
                     }
                 }
             }
+            return matrix;
+        }
+
+        private static char[][] ThirdType(string[] sentence, char[][] matrix, int direction)
+        {
+            Queue<char> matrixFiller = Queue(sentence);
+
+            while (matrixFiller.Count != 0)
+            {
+                for (int row = 0; row < matrix.Length; row++)
+                {
+                    if (row % 2 == direction)
+                    {
+                        for (int col = 0; col <= matrix[row].Length - 1; col++)
+                        {
+                            matrix[row][col] = matrixFiller.Dequeue();
+                        }
+                    }
+                    else
+                    {
+                        for (int col = matrix[row].Length - 1; col >= 0; col--)
+                        {
+                            matrix[row][col] = matrixFiller.Dequeue();
+                        }
+                    }
+                }
+            }
 
             return matrix;
+        }
+
+        private static char[][] FourthType(string[] sentence, char[][] matrix, int direction)
+        {
+            Queue<char> matrixFiller = Queue(sentence);
+
+            while (matrixFiller.Count != 0)
+            {
+                for (int row = matrix.Length - 1; row >= 0; row--)
+                {
+                    if (row % 2 == direction)
+                    {
+                        for (int col = 0; col <= matrix[row].Length - 1; col++)
+                        {
+                            matrix[row][col] = matrixFiller.Dequeue();
+                        }
+                    }
+                    else
+                    {
+                        for (int col = matrix[row].Length - 1; col >= 0; col--)
+                        {
+                            matrix[row][col] = matrixFiller.Dequeue();
+                        }
+                    }
+                }
+            }
+
+            return matrix;
+        }
+
+        private static Queue<char> Queue(string[] sentence)
+        {
+            string matrixSentence = string.Join("", sentence);
+            Queue<char> queue = new Queue<char>();
+            foreach (var letter in matrixSentence)
+            {
+                queue.Enqueue(letter);
+            }
+            return queue;
+        }
+
+        private static void PrintMatrix(char[][] matrix)
+        {
+            for (int row = 0; row < matrix.Length; row++)
+            {
+                for (int col = 0; col < matrix[row].Length; col++)
+                {
+                    Console.Write($"{matrix[row][col]} ");
+                }
+                Console.WriteLine();
+            }
         }
 
         public override bool IsCorrectAnswer(string answer)
