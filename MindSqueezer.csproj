@@ -46,7 +46,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\SentenceInMatrixType.cs" />
+    <Compile Include="Enums\PlaceSentenceInMatrixType.cs" />
     <Compile Include="Messages.cs" />
     <Compile Include="OptionsMenu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
