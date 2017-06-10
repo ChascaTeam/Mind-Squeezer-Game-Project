@@ -1,6 +1,5 @@
 ﻿namespace MindSqueezer.Questions
 {
-    using MindSqueeze.App;
     using System;
     using System.IO;
     using System.Linq;

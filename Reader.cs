@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MindSqueeze.App
+namespace MindSqueezer
 {
     public class Reader
     {
@@ -9,8 +9,5 @@ namespace MindSqueeze.App
             return Console.ReadLine();
 
         }
-            
-           
-    
     }
 }

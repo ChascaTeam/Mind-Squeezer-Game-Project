@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MindSqueeze.App;
 using MindSqueezer.Enums;
 
 namespace MindSqueezer.Questions

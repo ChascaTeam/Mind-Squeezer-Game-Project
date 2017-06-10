@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MindSqueeze.App
+namespace MindSqueezer
 {
     class StartUp
     {

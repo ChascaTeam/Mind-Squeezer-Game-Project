@@ -1,5 +1,4 @@
 ﻿using System;
-using MindSqueeze.App;
 
 namespace MindSqueezer.Questions
 {

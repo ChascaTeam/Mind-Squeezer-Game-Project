@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace MindSqueeze.App
+namespace MindSqueezer
 {
     public abstract class Question
     {
