@@ -110,7 +110,6 @@
             PrintMatrix(matrix, rotationType, rows, cols);
 
             this.Answer = currentWord;
-
         }
 
         public override bool IsCorrectAnswer(string answer)
