@@ -58,7 +58,6 @@
     <Compile Include="Questions\ReadSentenceInMatrixQuestion.cs" />
     <Compile Include="Questions\FindWordInMatrixQuestion.cs" />
     <Compile Include="Questions\MathMatrixQuestion.cs" />
-    <Compile Include="RandomGenerator.cs" />
     <Compile Include="Reader.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="StartUp.cs" />
@@ -70,6 +69,12 @@
   <ItemGroup>
     <Content Include="Imports\alphabet.txt" />
     <Content Include="Imports\FindWordsInMatrixWords.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="MindSqueezer.Utilities\MindSqueezer.Utilities.csproj">
+      <Project>{8aeaecd0-a272-4642-af5b-f7273cd5048d}</Project>
+      <Name>MindSqueezer.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>

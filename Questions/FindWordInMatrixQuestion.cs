@@ -1,4 +1,6 @@
-﻿namespace MindSqueezer.Questions
+﻿using MindSqueezer.Utilities;
+
+namespace MindSqueezer.Questions
 {
     using System;
     using System.IO;
