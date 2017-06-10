@@ -64,6 +64,10 @@
   <ItemGroup>
     <Folder Include=".vs\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Imports\alphabet.txt" />
+    <Content Include="Imports\FindWordsInMatrixWords.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSHARP.Targets" />
   <ProjectExtensions>
     <VisualStudio AllowExistingFolder="true" />

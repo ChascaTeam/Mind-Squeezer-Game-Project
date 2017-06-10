@@ -2,12 +2,14 @@
 {
     using MindSqueeze.App;
     using System;
-    using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
-    using System.Text;
 
     public class FindWordInMatrixQuestion : Question
     {
+        private const int Rows = 4;
+        private const int Cols = 5;
+
         public FindWordInMatrixQuestion(string questionText)
         {
             this.QuestionText = questionText;
@@ -24,31 +26,23 @@
             Console.WriteLine();
 
             // Array with 4 and 5 letters words
-            string[] words = new string[]
-            {
-                "quake", "glazy", "japan", "joker", "pizza", "quick", "zombi",
-                "quirk", "jazz", "quiz", "jump", "junk", "cozy", "joke", "java",
-                "lazy", "maze", "zoom", "kick", "haze", "mock", "back", "wick",
-                "judo", "pump", "exam", "bump", "zone", "pack", "doze", "quit",
-                "juice", "knock", "prize", "klick", "hazel", "query", "zebra",
-                "chump", "mummy", "check", "chick", "puppy", "eject", "enjoy", "glaze"
-            };
-
+            string[] words = File.ReadAllText("../../Imports/FindWordsInMatrixWords.txt")
+                .Split(new char[] { ' ', ',' }, 
+                StringSplitOptions.RemoveEmptyEntries); 
+           
             // Array with alphabet
-            char[] alphabet = new char[]
-            {
-                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-                'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
-            };
+            char[] alphabet = File.ReadAllText("../../Imports/alphabet.txt")
+                .Split(new char[] { ' ', ',' },
+                StringSplitOptions.RemoveEmptyEntries)
+                .Select(char.Parse)
+                .ToArray();
 
             // Initializing of matix
-            int rows = 4;
-            int cols = 5;
-            char[][] matrix = new char[rows][];
+            char[][] matrix = new char[Rows][];
 
-            for (int currRow = 0; currRow < 4; currRow++)
+            for (int currRow = 0; currRow < Rows; currRow++)
             {
-                matrix[currRow] = new char[cols];
+                matrix[currRow] = new char[Cols];
             }
 
             // Choosing random word from the array
@@ -107,7 +101,7 @@
                 matrix = RotateMatrixThreeTimes(matrix);
             }
 
-            PrintMatrix(matrix, rotationType, rows, cols);
+            PrintMatrix(matrix, rotationType, Rows, Cols);
 
             this.Answer = currentWord;
         }
@@ -117,18 +111,18 @@
             return this.Answer.ToLower().Equals(answer.ToLower()) && answer.Length != 0;
         }
 
-        private static void PrintMatrix(char[][] matrix, int rotationType, int rows, int cols)
+        private static void PrintMatrix(char[][] matrix, int rotationType, int Rows, int Cols)
         {
             if (rotationType == 1 || rotationType == 3)
             {
-                for (int currRow = 0; currRow < cols; currRow++)
+                for (int currRow = 0; currRow < Cols; currRow++)
                 {
                     Console.WriteLine(string.Join(" ", matrix[currRow]));
                 }
             }
             else
             {
-                for (int currRow = 0; currRow < rows; currRow++)
+                for (int currRow = 0; currRow < Rows; currRow++)
                 {
                     Console.WriteLine(string.Join(" ", matrix[currRow]));
                 }
