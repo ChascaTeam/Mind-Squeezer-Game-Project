@@ -86,22 +86,27 @@
             FillingTheRestPartOfTheMatrix(matrix, alphabet);
 
             // Choosing rotation type
-            int rotationType = RandomGenerator.GetRandomNumber(1, 4);
+            int rotationType = RandomGenerator.GetRandomNumber(0, 4);
 
             if (rotationType == 1)
             {
                 matrix = RotateMatrixOneTime(matrix);
+                PrintMatrix(matrix, rotationType, Rows, Cols);
             }
             else if (rotationType == 2)
             {
                 matrix = RotateMatrixTwoTimes(matrix);
+                PrintMatrix(matrix, rotationType, Rows, Cols);
             }
             else if (rotationType == 3)
             {
                 matrix = RotateMatrixThreeTimes(matrix);
+                PrintMatrix(matrix, rotationType, Rows, Cols);
             }
-
-            PrintMatrix(matrix, rotationType, Rows, Cols);
+            else if (rotationType == 0)
+            {
+                PrintMatrix(matrix, rotationType, Rows, Cols);
+            }
 
             this.Answer = currentWord;
         }
