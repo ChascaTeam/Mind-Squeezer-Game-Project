@@ -4,16 +4,22 @@ namespace MindSqueezer
 {
     public static class Messages
     {
-        public const string EntryMsg = "Welcome!"; //TODO
+        public const string EntryMsg = "Welcome!\nPrepare your mind for squeezing!"; //TODO
 
         public const string MainMenu = "Choose menu option:" +
-                                       "\n- Start" +
-                                       "\n- Info" +
-                                       "\n- HighScores" +
-                                       "\n- Quit";
+                                       "\n Start " +
+                                       "\n Game Rules " +
+                                       "\n HighScores " +
+                                       "\n Credits " +
+                                       "\n Quit ";
 
-        public const string Info = "Info"; //TODO
+        public const string Credits = " This game was made by:" +
+                                      "\n\nProgrammer1" +
+                                      "\n\nProgrammer2" +
+                                      "\n\nProgrammer3" +
+                                      "\n\nProgrammer4\n"; //TODO
 
+        public const string GameRules = "Question types:\n\n1.ColorQuestion:...\n\n2.FindWordInMatrix:...\n\n3.MathMatrixQuestion:...\n\n4.ReadSentenceInMatrixQuestion:...\n"; //TODO
         //TODO
 
         public const string WrongInput = "Wrong Input! Try again.";

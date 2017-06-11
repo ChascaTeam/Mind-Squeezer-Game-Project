@@ -24,12 +24,18 @@ namespace MindSqueezer
                 {
                     Console.BackgroundColor = ConsoleColor.Black;
                     Console.ForegroundColor = ConsoleColor.White;
+
                     if (current == pointer)
                     {
                         Console.BackgroundColor = ConsoleColor.White;
-                        Console.ForegroundColor = ConsoleColor.Black;
+                        Console.ForegroundColor = ConsoleColor.Black;                       
+                        Writer.WriteMessageOnNewLine($">{line}<");
                     }
-                    Console.WriteLine($"{line}");
+                    else
+                    {
+                        Writer.WriteMessageOnNewLine($" {line}");
+                    }
+
                     current++;
                 }
 
@@ -56,27 +62,73 @@ namespace MindSqueezer
                     response = "Start";
                     break;
                 case 3:
-                    response = "Info";
+                    response = "GameRules";
                     break;
                 case 4:
                     response = "HighScores";
                     break;
                 case 5:
+                    response = "Credits";
+                    break;
+                case 6:
                     response = "Quit";
                     break;
             }
 
-            if (response == "Info")
+            
+            if (response == "Start")
             {
-                Writer.WriteMessageOnNewLine(Messages.Info);
+                var totalScore = 0;
+                while (true)
+                {
+                    Console.Clear();
+
+                    Question quest =
+                        Activator.CreateInstance(Type.GetType(Question.GetRandomQuestionType())) as Question;
+
+                    Writer.WriteMessageOnNewLine(quest.QuestionText);
+
+                    quest.GenerateQuestion();
+
+                    if (!quest.IsCorrectAnswer(Console.ReadLine()))
+                    {
+                        Console.WriteLine("wrong");
+                        break;
+                    }
+
+                    totalScore = Score.Add(totalScore);
+                    Writer.WriteMessageOnNewLine($"Total score: {totalScore}");
+                    Writer.WriteMessageOnNewLine(Messages.RightInput);
+                    System.Threading.Thread.Sleep(1000);
+                }
+
+                Writer.WriteMessageOnNewLine($"Your score: {totalScore}");
+                Writer.WriteMessageOnNewLine(Messages.EndMsg);
+                if (Score.CheckIfTopScore(totalScore))
+                {
+                    Writer.WriteMessageOnNewLine("Congratulations! You've made it to the top 3!");
+                    Writer.WriteMessage("Write your name: ");
+                    Score.IsInTheTop(totalScore);
+                }
+                
+                System.Threading.Thread.Sleep(1000);
             }
-            else if (response == "Start")
+            else if (response == "GameRules")
             {
-                //TODO               
+                Console.Clear();              
+                Writer.WriteMessageOnNewLine(Messages.GameRules);
+                ReturnButton();
+                
             }
             else if (response == "HighScores")
             {
                 //TODO
+            }
+            if (response == "Credits")
+            {
+                Console.Clear();              
+                Writer.WriteMessageOnNewLine(Messages.Credits);
+                ReturnButton();
             }
             else if (response == "Quit")
             {
@@ -84,6 +136,14 @@ namespace MindSqueezer
                 Console.ForegroundColor = ConsoleColor.White;
                 Environment.Exit(0);
             }
+        }
+
+        private static void ReturnButton()
+        {
+            Console.BackgroundColor = ConsoleColor.White;
+            Console.ForegroundColor = ConsoleColor.Black;
+            Writer.WriteMessageOnNewLine($">return<");
+            var key = Console.ReadKey();
         }
     }
 }

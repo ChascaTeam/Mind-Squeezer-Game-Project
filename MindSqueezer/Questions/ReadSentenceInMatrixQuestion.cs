@@ -104,47 +104,50 @@ namespace MindSqueezer.Questions
             SentenceInMatrixType randomMatrixType = (SentenceInMatrixType) RandomGenerator.GetRandomNumber(Enum.GetValues(typeof(SentenceInMatrixType)).Length);
 
             // all types fill the matrix in zig-zag form
-            // Matrix Name|      matrix start - matrix end         | zig-zag direction|
-            // FirstType 0 - takes from top left to top right       (up&down)
-            // FirstType 1 - takes from bottom left to bottom right (down&up)
-            // SecondType 0 - takes from top right to top left      (up&down)
-            // SecondType 1 - takes from bottom right to bottom left (down&up)
-            // ThirdType 0 - takes from top left to bottom left     (left&right)
-            // ThirdType 1 - takes from top right to bottom right   (left&right)
-            // ThirdType 0 - takes from bottom left to top left     (left&right)
-            // ThirdType 1 - takes from bottom right to top right   (left&right)
+            // |Matrix Name |matrix start |matrix end  |zig-zag direction|
+            // ------------------------------------------------------------
+            // |FirstType  0|top left     |top right   |up&down          |
+            // |FirstType  1|bottom left  |bottom right|down&up          |
+            // |SecondType 0|top right    |top left    |up&down          |
+            // |SecondType 1| bottom right|bottom left |down&up          |
+            // |ThirdType  0| top left    |bottom left |left&right       |
+            // |ThirdType  1| top right   |bottom right|left&right       |
+            // |ThirdType  0| bottom left |top left    |left&right       |
+            // |ThirdType  1| bottom right|top right   |left&right       |
 
-            if (randomMatrixType == SentenceInMatrixType.TopLeftRight)
+            switch (randomMatrixType)
             {
-                matrix = FirstType(sentence, matrix, 0);
-            }
-            else if (randomMatrixType == SentenceInMatrixType.BottomLeftRight)
-            {
-                matrix = FirstType(sentence, matrix, 1);
-            }
-            else if (randomMatrixType == SentenceInMatrixType.TopRightLeft)
-            {
-                matrix = SecondType(sentence, matrix, 0);
-            }
-            else if (randomMatrixType == SentenceInMatrixType.BottomRightLeft)
-            {
-                matrix = SecondType(sentence, matrix, 1);
-            }
-            else if (randomMatrixType == SentenceInMatrixType.TopLeftBottomLeft)
-            {
-                matrix = ThirdType(sentence, matrix, 0);
-            }
-            else if (randomMatrixType == SentenceInMatrixType.TopRightBottomRight)
-            {
-                matrix = ThirdType(sentence, matrix, 1);
-            }
-            else if (randomMatrixType == SentenceInMatrixType.BottomLeftTopLeft)
-            {
-                matrix = FourthType(sentence, matrix, 0);
-            }
-            else if (randomMatrixType == SentenceInMatrixType.BottomRightTopRight)
-            {
-                matrix = FourthType(sentence, matrix, 1);
+                case SentenceInMatrixType.TopLeftRight:
+                    matrix = FirstType(sentence, matrix, 0);
+                    break;
+
+                case SentenceInMatrixType.BottomLeftRight:
+                    matrix = FirstType(sentence, matrix, 1);
+                    break;
+
+                case SentenceInMatrixType.TopRightLeft:
+                    matrix = SecondType(sentence, matrix, 0);
+                    break;
+
+                case SentenceInMatrixType.BottomRightLeft:
+                    matrix = SecondType(sentence, matrix, 1);
+                    break;
+
+                case SentenceInMatrixType.TopLeftBottomLeft:
+                    matrix = ThirdType(sentence, matrix, 0);
+                    break;
+
+                case SentenceInMatrixType.TopRightBottomRight:
+                    matrix = ThirdType(sentence, matrix, 1);
+                    break;
+
+                case SentenceInMatrixType.BottomLeftTopLeft:
+                    matrix = FourthType(sentence, matrix, 0);
+                    break;
+
+                case SentenceInMatrixType.BottomRightTopRight:
+                    matrix = FourthType(sentence, matrix, 1);
+                    break;
             }
 
             return matrix;
