@@ -44,7 +44,6 @@ namespace MindSqueezer
                         break;
                     case "Enter":
                         goto breakOut;
-                        break;
                     case "Escape":
                         return;
                 }
