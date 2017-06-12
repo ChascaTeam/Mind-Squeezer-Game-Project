@@ -22,9 +22,11 @@ namespace MindSqueezer
         public const string GameRules = "Question types:\n\n1.ColorQuestion:...\n\n2.FindWordInMatrix:...\n\n3.MathMatrixQuestion:...\n\n4.ReadSentenceInMatrixQuestion:...\n"; //TODO
         //TODO
 
-        public const string WrongInput = "Wrong Input! Try again.";
+        public const string WrongInput = "Wrong answer!";
 
         public const string RightInput = "Correct!";
+
+        public const string TimeUp = "Time's up!";
 
         public const string QuestionTypeColorGuess = "What color is the word?";
 

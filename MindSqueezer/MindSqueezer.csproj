@@ -64,6 +64,7 @@
     <Compile Include="Reader.cs" />
     <Compile Include="Score.cs" />
     <Compile Include="StartUp.cs" />
+    <Compile Include="Timer.cs" />
     <Compile Include="Writer.cs" />
   </ItemGroup>
   <ItemGroup>

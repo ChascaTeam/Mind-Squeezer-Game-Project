@@ -28,7 +28,7 @@ namespace MindSqueezer
                     if (current == pointer)
                     {
                         Console.BackgroundColor = ConsoleColor.White;
-                        Console.ForegroundColor = ConsoleColor.Black;                       
+                        Console.ForegroundColor = ConsoleColor.Black;
                         Writer.WriteMessageOnNewLine($">{line}<");
                     }
                     else
@@ -38,6 +38,7 @@ namespace MindSqueezer
 
                     current++;
                 }
+
 
                 var key = Console.ReadKey();
                 switch (key.Key.ToString())
@@ -53,7 +54,7 @@ namespace MindSqueezer
                     case "Escape":
                         return;
                 }
-                
+
             }
             breakOut:
             switch (pointer)
@@ -75,7 +76,7 @@ namespace MindSqueezer
                     break;
             }
 
-            
+
             if (response == "Start")
             {
                 var totalScore = 0;
@@ -86,13 +87,23 @@ namespace MindSqueezer
                     Question quest =
                         Activator.CreateInstance(Type.GetType(Question.GetRandomQuestionType())) as Question;
 
+                    int secs = 50000;
+                    string name;
+                    Writer.WriteMessageOnNewLine($"You have {secs / 1000} seconds to answer.\n");
                     Writer.WriteMessageOnNewLine(quest.QuestionText);
 
                     quest.GenerateQuestion();
 
-                    if (!quest.IsCorrectAnswer(Console.ReadLine()))
+                    bool success = Timer.TryReadLine(out name, secs);
+
+                    if (!success)
                     {
-                        Console.WriteLine("wrong");
+                        Writer.WriteMessageOnNewLine(Messages.TimeUp);
+                        break;
+                    }
+                    else if (!quest.IsCorrectAnswer(name))
+                    {
+                        Writer.WriteMessageOnNewLine(Messages.WrongInput);
                         break;
                     }
 
@@ -112,15 +123,15 @@ namespace MindSqueezer
 
                     Score.IsInTheTop(totalScore);
                 }
-                
+
                 System.Threading.Thread.Sleep(1000);
             }
             else if (response == "GameRules")
             {
-                Console.Clear();              
+                Console.Clear();
                 Writer.WriteMessageOnNewLine(Messages.GameRules);
                 ReturnButton();
-                
+
             }
             else if (response == "HighScores")
             {
@@ -132,9 +143,9 @@ namespace MindSqueezer
                 Writer.WriteMessageOnNewLine(Messages.LongLine);
                 ReturnButton();
             }
-            if (response == "Credits")
+            else if (response == "Credits")
             {
-                Console.Clear();              
+                Console.Clear();
                 Writer.WriteMessageOnNewLine(Messages.Credits);
                 ReturnButton();
             }
