@@ -36,5 +36,16 @@ namespace MindSqueezer
 
         public const string EndMsg = "Game Over!";
         
+        public const string EnterTopThree = "Congratulations! You've made it to the top 3!";
+
+        public const string WriteYourName = "Write your name (20 chars max): ";
+
+        public const string HighScores = "|Place|Score|        Name        |";
+
+        public const string LongLine = "----------------------------------";
+
+
+
+
     }
 }

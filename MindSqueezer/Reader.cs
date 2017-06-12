@@ -9,5 +9,10 @@ namespace MindSqueezer
             return Console.ReadLine();
 
         }
+
+        public static int Read()
+        {
+            return Console.Read();
+        }
     }
 }

@@ -104,10 +104,12 @@ namespace MindSqueezer
 
                 Writer.WriteMessageOnNewLine($"Your score: {totalScore}");
                 Writer.WriteMessageOnNewLine(Messages.EndMsg);
+                System.Threading.Thread.Sleep(1000);
                 if (Score.CheckIfTopScore(totalScore))
                 {
-                    Writer.WriteMessageOnNewLine("Congratulations! You've made it to the top 3!");
-                    Writer.WriteMessage("Write your name: ");
+                    Writer.WriteMessageOnNewLine(Messages.EnterTopThree);
+                    Writer.WriteMessage(Messages.WriteYourName);
+
                     Score.IsInTheTop(totalScore);
                 }
                 
@@ -122,7 +124,13 @@ namespace MindSqueezer
             }
             else if (response == "HighScores")
             {
-                //TODO
+                Console.Clear();
+                Writer.WriteMessageOnNewLine(Messages.LongLine);
+                Writer.WriteMessageOnNewLine(Messages.HighScores);
+                Writer.WriteMessageOnNewLine(Messages.LongLine);
+                Score.CheckHighScores();
+                Writer.WriteMessageOnNewLine(Messages.LongLine);
+                ReturnButton();
             }
             if (response == "Credits")
             {
