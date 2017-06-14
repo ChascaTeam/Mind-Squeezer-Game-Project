@@ -13,13 +13,7 @@ namespace MindSqueezer
 
             while (true)
             {
-                
                 OptionsMenu.Menu();
-                
-                
-              
-                
-                //CheckIfTopScore(totalScore);
             }
         }
     }

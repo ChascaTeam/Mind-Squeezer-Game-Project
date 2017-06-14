@@ -22,8 +22,7 @@ namespace MindSqueezer
                 gotInput.Set();
             }
         }
-
-        
+      
         public static bool TryReadLine(out string line, int timeOutMillisecs = Timeout.Infinite)
         {
             getInput = new AutoResetEvent(false);
