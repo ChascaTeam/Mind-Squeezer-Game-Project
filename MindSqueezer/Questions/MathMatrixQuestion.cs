@@ -24,13 +24,9 @@ namespace MindSqueezer.Questions
         }
         public override void GenerateQuestion()
         {
+            GenerateEquations();
             //Array with mathematical equations
-            string[] equationsArr = new string[]
-            {
-                "4 + 3", "1 + 7", "16 / 4 + 3", "12/3 + 3", "12/3 + 2", "12/4 + 3", "13/13 + 0",
-                "15*0 + 8", "2 + 7", "1 + 4", "2 + 3 - 4", "12/3 - 1 + 4", "(14 - 10) * 2",
-                "10*0 + 9", "7 - 5 + 2", "2 * 3 + 1", "2 * 4 - 2", "12 - 7", "13 - 9", "9 - 8 + 2 + 3 + 1", "6 + 1 - 7"
-            };
+            string[] equationsArr = GenerateEquations();
 
             //Matrix initialization.
             InitializeMatrix();
@@ -45,14 +41,28 @@ namespace MindSqueezer.Questions
 
             //Calculating the equation.
             int result = CalculateEquation(equation);
-            
+
             //Populating the matrix containing at least one occurrence of the result.
             PopulateMatrix(result);
 
             //Printing the matrix.
             PrintMatrix(matrix);
 
-           
+
+        }
+
+        private static string[] GenerateEquations()
+        {
+            int numberUpTo4 = Utilities.RandomGenerator.GetRandomNumber(4);
+            int numberUpTo5 = Utilities.RandomGenerator.GetRandomNumber(5);
+            int numberUpTo6 = Utilities.RandomGenerator.GetRandomNumber(6);
+            string equationA = $"{numberUpTo4} * 2 + 1";
+            string equationB = $"1 + 2 * {numberUpTo4}";
+            string equationC = $"3 + {numberUpTo6}";
+            string equationD = $"6 - {numberUpTo6}";
+            string equationE = $"6 * 0 + {numberUpTo4}";
+            string equationF = $"({numberUpTo5} * 2 + 2) / 2";
+            return new string[] {equationA, equationB, equationC, equationD, equationE, equationF};
         }
 
         private void InitializeMatrix()
@@ -91,6 +101,7 @@ namespace MindSqueezer.Questions
         {
             Writer.WriteMessageOnNewLine($"{equation} = X");
             Writer.WriteMessageOnNewLine("Example answer: A 1");
+            Writer.WriteMessageOnNewLine();
         }
 
         private static int CalculateEquation(string equation)

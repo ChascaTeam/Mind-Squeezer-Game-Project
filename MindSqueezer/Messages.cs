@@ -34,7 +34,7 @@ namespace MindSqueezer
         public const string LongLine = "-----------------------------------";
 
         //Answer responses
-        public const string WrongInput = "Wrong answer!";
+        
 
         public const string RightInput = "Correct!";
 
@@ -50,7 +50,7 @@ namespace MindSqueezer
         public const string QuestionTypeReadSentenceInMatrix = "Unwrap the sentence: ";
 
         //After game responses
-        public const string EndMsg = "Game Over!";
+        public const string EndMsg = "Wrong answer! - Game Over";
         
         public const string EnterTopThree = "Congratulations! You've made it to the top 3!";
 

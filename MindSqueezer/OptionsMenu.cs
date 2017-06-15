@@ -1,39 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MindSqueezer.Utilities;
 
 namespace MindSqueezer
 {
     public static class OptionsMenu
     {
+        
+        private static List<string> menu = Messages.MainMenu.Split('\n').ToList();
         public static void Menu()
         {
-            List<string> menu = Messages.MainMenu.Split('\n').ToList();
             int pointer = 2;
 
             var response = String.Empty;
 
             while (true)
             {
-                Console.BackgroundColor = ConsoleColor.Black;
-                Console.ForegroundColor = ConsoleColor.White;
+                DefaultColors();
+
                 Console.Clear();
                 int current = 1;
 
                 foreach (var line in menu)
                 {
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.ForegroundColor = ConsoleColor.White;
-
+                    DefaultColors();
+                    if (current == 1)
+                    {
+                    ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);
+                    }
                     if (current == pointer)
                     {
-                        Console.BackgroundColor = ConsoleColor.White;
-                        Console.ForegroundColor = ConsoleColor.Black;
-                        Writer.WriteMessageOnNewLine($">{line}<");
+                        if (current == 6)
+                        {
+                            ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
+                            Writer.WriteMessageOnNewLine($">{line}<");
+                        }
+                        else
+                        {
+                            CurrentChoiceColors();
+                            Writer.WriteMessageOnNewLine($">{line}<");
+                        }
                     }
                     else
                     {
-                        Writer.WriteMessageOnNewLine($" {line}");
+                        Writer.WriteMessageOnNewLine($"{line}");
                     }
 
                     current++;
@@ -41,18 +52,18 @@ namespace MindSqueezer
 
                 var key = Console.ReadKey();
 
-                switch (key.Key.ToString())
+                switch (key.Key)
                 {
-                    case "UpArrow":
+                    case ConsoleKey.Escape:
+                        return;
+                    case ConsoleKey.UpArrow:
                         if (pointer > 2) pointer--;
                         break;
-                    case "DownArrow":
+                    case ConsoleKey.DownArrow:
                         if (pointer < menu.Count()) pointer++;
                         break;
-                    case "Enter":
+                    case ConsoleKey.Enter:
                         goto breakOut;
-                    case "Escape":
-                        return;
                 }
             }
 
@@ -77,10 +88,19 @@ namespace MindSqueezer
             }
         }
 
+        private static void CurrentChoiceColors()
+        {
+            ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
+        }
+
+        private static void DefaultColors()
+        {
+            ColorChanger.ChangeColor(ConsoleColor.White, ConsoleColor.Black);
+        }
+
         private static void ReturnButton()
         {
-            Console.BackgroundColor = ConsoleColor.White;
-            Console.ForegroundColor = ConsoleColor.Black;
+            CurrentChoiceColors();
             Writer.WriteMessageOnNewLine(">return<");
             var key = Console.ReadKey();
         }
@@ -99,36 +119,50 @@ namespace MindSqueezer
                 int secs = 25000;
                 string name;
 
+                ColorChanger.ChangeColor(ConsoleColor.Red,ConsoleColor.Black);
                 Writer.WriteMessageOnNewLine($"You have {secs / 1000} seconds to answer.\n");
+                ColorChanger.ChangeColor(ConsoleColor.White, ConsoleColor.Black);
                 Writer.WriteMessageOnNewLine(quest.QuestionText);
 
                 quest.GenerateQuestion();
-
+                Writer.WriteMessageOnNewLine();
                 bool success = Timer.TryReadLine(out name, secs);
 
                 if (!success)
                 {
+                    ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
+                    Writer.WriteMessageOnNewLine();
                     Writer.WriteMessageOnNewLine(Messages.TimeUp);
+                    ColorChanger.DefaultColor();
                     break;
                 }
                 else if (!quest.IsCorrectAnswer(name))
                 {
-                    Writer.WriteMessageOnNewLine(Messages.WrongInput);
+                    ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
+                    Writer.WriteMessageOnNewLine(Messages.EndMsg);
+                    ColorChanger.DefaultColor();
                     break;
                 }
-
+                Writer.WriteMessageOnNewLine();
                 totalScore = Score.Add(totalScore);
                 Writer.WriteMessageOnNewLine($"Total score: {totalScore}");
+                ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
                 Writer.WriteMessageOnNewLine(Messages.RightInput);
+                ColorChanger.DefaultColor();
                 System.Threading.Thread.Sleep(1000);
             }
 
+            ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);
             Writer.WriteMessageOnNewLine($"Your score: {totalScore}");
-            Writer.WriteMessageOnNewLine(Messages.EndMsg);
+            ColorChanger.DefaultColor();
+            
             System.Threading.Thread.Sleep(1000);
             if (Score.CheckIfTopScore(totalScore))
             {
+                Writer.WriteMessageOnNewLine();
+                ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
                 Writer.WriteMessageOnNewLine(Messages.EnterTopThree);
+                ColorChanger.DefaultColor();
                 Writer.WriteMessage(Messages.WriteYourName);
 
                 Score.IsInTheTop(totalScore);

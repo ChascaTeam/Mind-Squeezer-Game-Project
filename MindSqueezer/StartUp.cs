@@ -1,4 +1,5 @@
 ﻿using System;
+using MindSqueezer.Utilities;
 
 namespace MindSqueezer
 {
@@ -8,6 +9,7 @@ namespace MindSqueezer
         {
             Question.RegisterQuestions();
 
+            ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
             Writer.WriteMessageOnNewLine(Messages.EntryMsg);
             System.Threading.Thread.Sleep(2000);
 
