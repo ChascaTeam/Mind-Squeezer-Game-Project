@@ -7,39 +7,39 @@ namespace MindSqueezer
 {
     public static class OptionsMenu
     {
-        
+
         private static List<string> menu = Messages.MainMenu.Split('\n').ToList();
+
         public static void Menu()
         {
             int pointer = 2;
-
             var response = String.Empty;
 
             while (true)
             {
                 DefaultColors();
-
                 Console.Clear();
                 int current = 1;
 
                 foreach (var line in menu)
                 {
                     DefaultColors();
+
                     if (current == 1)
                     {
-                    ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);
+                        ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);
                     }
                     if (current == pointer)
                     {
                         if (current == 6)
                         {
                             ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
-                            Writer.WriteMessageOnNewLine($">{line}<");
+                            Writer.WriteMessageOnNewLine($"{line} <");
                         }
                         else
                         {
                             CurrentChoiceColors();
-                            Writer.WriteMessageOnNewLine($">{line}<");
+                            Writer.WriteMessageOnNewLine($"{line} <");
                         }
                     }
                     else
@@ -55,12 +55,15 @@ namespace MindSqueezer
                 switch (key.Key)
                 {
                     case ConsoleKey.Escape:
-                        return;
+                        pointer = 6;
+                        break;
                     case ConsoleKey.UpArrow:
                         if (pointer > 2) pointer--;
+                        else pointer = 6;
                         break;
                     case ConsoleKey.DownArrow:
                         if (pointer < menu.Count()) pointer++;
+                        else pointer = 2;
                         break;
                     case ConsoleKey.Enter:
                         goto breakOut;
@@ -70,20 +73,20 @@ namespace MindSqueezer
             breakOut:
             switch (pointer)
             {
-                case 2: 
-                    Start();                  
+                case 2:
+                    Start();
                     break;
-                case 3: 
+                case 3:
                     GameRules();
                     break;
-                case 4: 
+                case 4:
                     HighScores();
                     break;
-                case 5: 
+                case 5:
                     Credits();
                     break;
-                case 6: 
-                    Quit();                 
+                case 6:
+                    Quit();
                     break;
             }
         }
@@ -101,8 +104,18 @@ namespace MindSqueezer
         private static void ReturnButton()
         {
             CurrentChoiceColors();
-            Writer.WriteMessageOnNewLine(">return<");
-            var key = Console.ReadKey();
+            Writer.WriteMessageOnNewLine("\n Return <");
+            ConsoleKeyInfo key = Console.ReadKey(true);
+
+            while (key.Key != ConsoleKey.Enter)
+            {
+                key = Console.ReadKey(true);
+
+                if (key.Key == ConsoleKey.Escape)
+                {
+                    break;
+                }
+            }
         }
 
         private static void Start()
@@ -117,9 +130,9 @@ namespace MindSqueezer
                     Activator.CreateInstance(Type.GetType(Question.GetRandomQuestionType())) as Question;
 
                 int secs = 25000;
-                string name;
+                string name = string.Empty;
 
-                ColorChanger.ChangeColor(ConsoleColor.Red,ConsoleColor.Black);
+                ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
                 Writer.WriteMessageOnNewLine($"You have {secs / 1000} seconds to answer.\n");
                 ColorChanger.ChangeColor(ConsoleColor.White, ConsoleColor.Black);
                 Writer.WriteMessageOnNewLine(quest.QuestionText);
@@ -134,15 +147,19 @@ namespace MindSqueezer
                     Writer.WriteMessageOnNewLine();
                     Writer.WriteMessageOnNewLine(Messages.TimeUp);
                     ColorChanger.DefaultColor();
+
                     break;
                 }
-                else if (!quest.IsCorrectAnswer(name))
+
+                if (!quest.IsCorrectAnswer(name))
                 {
                     ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
                     Writer.WriteMessageOnNewLine(Messages.EndMsg);
                     ColorChanger.DefaultColor();
+
                     break;
                 }
+
                 Writer.WriteMessageOnNewLine();
                 totalScore = Score.Add(totalScore);
                 Writer.WriteMessageOnNewLine($"Total score: {totalScore}");
@@ -155,8 +172,8 @@ namespace MindSqueezer
             ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);
             Writer.WriteMessageOnNewLine($"Your score: {totalScore}");
             ColorChanger.DefaultColor();
-            
-            System.Threading.Thread.Sleep(1000);
+            System.Threading.Thread.Sleep(500);
+
             if (Score.CheckIfTopScore(totalScore))
             {
                 Writer.WriteMessageOnNewLine();
@@ -167,8 +184,8 @@ namespace MindSqueezer
 
                 Score.IsInTheTop(totalScore);
             }
-
-            System.Threading.Thread.Sleep(1000);
+            
+            ReturnButton();
         }
 
         private static void GameRules()
@@ -187,6 +204,7 @@ namespace MindSqueezer
             Writer.WriteMessageOnNewLine(Messages.LongLine);
             Score.CheckHighScores();
             Writer.WriteMessageOnNewLine(Messages.LongLine);
+            
             ReturnButton();
         }
 
@@ -195,7 +213,7 @@ namespace MindSqueezer
             Console.Clear();
             Writer.WriteMessageOnNewLine(Messages.Credits);
             ReturnButton();
-           
+
         }
 
         private static void Quit()

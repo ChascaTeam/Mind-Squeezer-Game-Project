@@ -42,7 +42,17 @@ namespace MindSqueezer
             else
             {
                 File.AppendAllLines(path, new string[] { "0 dummy", "0 dummy", "0 dummy" });
-                return true;
+                string[] HighScores = File.ReadAllLines(path);
+
+                int score = int.Parse(HighScores[2].Split()[0]);
+                if (score < totalScore)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
 
             }
             return false;

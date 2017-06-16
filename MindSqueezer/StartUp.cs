@@ -15,7 +15,9 @@ namespace MindSqueezer
 
             while (true)
             {
+               
                 OptionsMenu.Menu();
+                
             }
         }
     }
