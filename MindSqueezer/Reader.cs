@@ -1,4 +1,5 @@
 ﻿using System;
+using MindSqueezer.Utilities;
 
 namespace MindSqueezer
 {
@@ -13,10 +14,19 @@ namespace MindSqueezer
         {
            string inputName = ReadLine();
 
+            while (inputName.Length == 0)
+            {
+                ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
+                Writer.WriteMessageOnNewLine(Messages.EmptyName);
+                ColorChanger.ChangeColor(ConsoleColor.White, ConsoleColor.Black);                            
+                inputName = ReadLine();
+            }
+
             if (inputName.Length > limit)
             {
-                inputName = inputName.Substring(0, limit);
+                inputName = inputName.Substring(0, limit);                
             }
+
             return inputName;
         }
     }

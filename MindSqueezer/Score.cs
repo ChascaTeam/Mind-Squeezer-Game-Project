@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 
 
@@ -71,7 +72,7 @@ namespace MindSqueezer
             for (int i = 0; i < highScores.Length; i++)
             {
                 holder = new PlayerScores();
-                holder.Name = new string(highScores[i].Skip(highScores[i].IndexOf(' ')).ToArray());
+                holder.Name = highScores[i].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1];
                 holder.Score = int.Parse(highScores[i].Split()[0]);
                 arr[i] = holder;
             }
@@ -111,7 +112,7 @@ namespace MindSqueezer
 
             for (int i = 0; i < highScores.Length; i++)
             {
-                var name = new string(highScores[i].Skip(highScores[i].IndexOf(' ')).ToArray());
+                var name = highScores[i].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1];
                 var score = int.Parse(highScores[i].Split()[0]);
 
                 Writer.WriteMessageOnNewLine($"|{i + 1,3}  |{score,4} | {name,-20}|");

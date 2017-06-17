@@ -54,7 +54,9 @@
 
         public const string WriteYourName = "Write your name (20 chars max): ";
 
-       
+        public const string EmptyName = "Name cannot be empty!";
+
+
 
 
 

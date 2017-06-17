@@ -18,6 +18,6 @@ namespace MindSqueezer
         {
             Console.WriteLine();
         }
-        //TODO
+        
     }
 }

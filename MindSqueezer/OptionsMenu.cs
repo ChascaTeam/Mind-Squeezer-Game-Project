@@ -130,10 +130,9 @@ namespace MindSqueezer
                 Question quest =
                     Activator.CreateInstance(Type.GetType(Question.GetRandomQuestionType())) as Question;
 
-                string name = string.Empty;
-
-                Console.WriteLine("asd");
+                string name = string.Empty; 
                 
+                Writer.WriteMessageOnNewLine();
                 Writer.WriteMessageOnNewLine(quest.QuestionText);
 
                 quest.GenerateQuestion();
@@ -196,14 +195,17 @@ namespace MindSqueezer
         private static void GameRules()
         {
             Console.Clear();
+
             Writer.WriteMessageOnNewLine(Messages.GameRules);
+
             ReturnButton();
         }
 
         private static void HighScores()
         {
             Console.Clear();
-            Writer.WriteMessageOnNewLine(Messages.HighScores);
+                    
+            Writer.WriteMessageOnNewLine(Messages.HighScores);          
             Writer.WriteMessageOnNewLine(Messages.LongLine);
             Writer.WriteMessageOnNewLine(Messages.HighScoresPanel);
             Writer.WriteMessageOnNewLine(Messages.LongLine);
@@ -223,8 +225,7 @@ namespace MindSqueezer
 
         private static void Quit()
         {
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.White;
+            ColorChanger.ChangeColor(ConsoleColor.White, ConsoleColor.Black);
             Environment.Exit(0);
         }
     }
