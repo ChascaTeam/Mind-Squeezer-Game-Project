@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using MindSqueezer.Utilities;
 
 namespace MindSqueezer.Questions
@@ -118,11 +116,12 @@ namespace MindSqueezer.Questions
 
         private static void PrintMatrix(int[][] matrix)
         {
-            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("- 1 2 3 4 5 6");
+
             for (int rowIndex = 0; rowIndex < matrix.Length; rowIndex++)
             {
-                Console.ForegroundColor = ConsoleColor.Green;
+                Console.ForegroundColor = ConsoleColor.Gray;
                 Console.Write((char)(rowIndex + 65));
                 for (int colIndex = 0; colIndex < matrix[0].Length; colIndex++)
                 {

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
-using System.Text;
 
 
 namespace MindSqueezer
@@ -73,11 +70,10 @@ namespace MindSqueezer
 
             for (int i = 0; i < highScores.Length; i++)
             {
-                    holder = new PlayerScores();
-                    var result = highScores[i].Split().ToArray();                   
-                    holder.Name = result[1];
-                    holder.Score = int.Parse(result[0]);
-                    arr[i]=holder;
+                holder = new PlayerScores();
+                holder.Name = new string(highScores[i].Skip(highScores[i].IndexOf(' ')).ToArray());
+                holder.Score = int.Parse(highScores[i].Split()[0]);
+                arr[i] = holder;
             }
 
            arr = arr.OrderByDescending(x => x.Score).ToArray();
@@ -97,39 +93,28 @@ namespace MindSqueezer
         {
             string path = "../../Imports/HighScores.txt";
 
-            if (File.Exists(path))
-            {
-                string[] HighScores = File.ReadAllLines(path);
-
-                if (HighScores.Length < 3)
-                {
-                    while (HighScores.Length != 3)
-                    {
-                        File.AppendAllLines(path, new string[] { "0 dummy" });
-                        HighScores = File.ReadAllLines(path);
-                    }
-
-                }
-                for (int i = 0; i < HighScores.Length; i++)
-                {
-                    var player = HighScores[i].Split();
-                   
-                    Writer.WriteMessageOnNewLine($"|{i+1,3}  |{player[0],4} | {player[1],-20}|");
-                }
-                            
-            }
-            else
+            if (!File.Exists(path))
             {
                 File.AppendAllLines(path, new string[] { "0 dummy", "0 dummy", "0 dummy" });
-                string[] HighScores = File.ReadAllLines(path);
+            }
 
-                for (int i = 0; i < HighScores.Length; i++)
+            string[] highScores = File.ReadAllLines(path);
+
+            if (highScores.Length < 3)
+            {
+                while (highScores.Length != 3)
                 {
-                    var player = HighScores[i].Split();
-
-                    Writer.WriteMessageOnNewLine($"|{i + 1,5}|{player[0],5}|{player[1],-20}|");
+                    File.AppendAllLines(path, new string[] { "0 dummy" });
                 }
+                highScores = File.ReadAllLines(path);
+            }
 
+            for (int i = 0; i < highScores.Length; i++)
+            {
+                var name = new string(highScores[i].Skip(highScores[i].IndexOf(' ')).ToArray());
+                var score = int.Parse(highScores[i].Split()[0]);
+
+                Writer.WriteMessageOnNewLine($"|{i + 1,3}  |{score,4} | {name,-20}|");
             }
         }
 

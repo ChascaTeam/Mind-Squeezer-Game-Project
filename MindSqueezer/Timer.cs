@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using MindSqueezer.Utilities;
 
 namespace MindSqueezer
 {
@@ -12,6 +9,7 @@ namespace MindSqueezer
         private static Thread inputThread;
         private static AutoResetEvent getInput, gotInput;
         private static string input;
+        private static bool gotInputt = false;
 
         private static void reader()
         {
@@ -19,6 +17,7 @@ namespace MindSqueezer
             {
                 getInput.WaitOne();
                 input = Console.ReadLine();
+                gotInputt = true;
                 gotInput.Set();
             }
         }
@@ -28,11 +27,38 @@ namespace MindSqueezer
             getInput = new AutoResetEvent(false);
             gotInput = new AutoResetEvent(false);
             inputThread = new Thread(reader);
+            gotInputt = false;
             inputThread.IsBackground = true;
             inputThread.Start();
             getInput.Set();
-            bool success = gotInput.WaitOne(timeOutMillisecs);
-            if (success)
+
+            
+            //var success = false;
+
+            for (int i = timeOutMillisecs; i >= 0 ; i -= 500)
+            {
+                if (gotInputt)
+                {
+                    break;
+                }
+
+                var cursorTop = Console.CursorTop;
+                var cursorLeft = Console.CursorLeft;
+                Console.SetCursorPosition(0, 0);
+
+                ColorChanger.ChangeColor(ConsoleColor.Gray, ConsoleColor.Black);
+                Writer.WriteMessage("You have ");
+                ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
+                Writer.WriteMessage($"{i / 1000}");
+                ColorChanger.ChangeColor(ConsoleColor.Gray, ConsoleColor.Black);
+                Writer.WriteMessage(" seconds to answer.\n");
+                ColorChanger.ChangeColor(ConsoleColor.White, ConsoleColor.Black);
+
+                Console.SetCursorPosition(cursorLeft, cursorTop);
+                Thread.Sleep(500);
+            }
+
+            if (gotInputt)
             {
                 line = input;
                 inputThread.Abort();
@@ -42,7 +68,7 @@ namespace MindSqueezer
                 line = null;
                 inputThread.Abort();
             }               
-            return success;
+            return gotInputt;
         }
 
     }

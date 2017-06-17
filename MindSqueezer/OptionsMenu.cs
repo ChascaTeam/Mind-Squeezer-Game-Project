@@ -121,6 +121,7 @@ namespace MindSqueezer
         private static void Start()
         {
             var totalScore = 0;
+            int seconds = 25000;
 
             while (true)
             {
@@ -129,17 +130,16 @@ namespace MindSqueezer
                 Question quest =
                     Activator.CreateInstance(Type.GetType(Question.GetRandomQuestionType())) as Question;
 
-                int secs = 25000;
                 string name = string.Empty;
 
-                ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
-                Writer.WriteMessageOnNewLine($"You have {secs / 1000} seconds to answer.\n");
-                ColorChanger.ChangeColor(ConsoleColor.White, ConsoleColor.Black);
+                Console.WriteLine("asd");
+                
                 Writer.WriteMessageOnNewLine(quest.QuestionText);
 
                 quest.GenerateQuestion();
                 Writer.WriteMessageOnNewLine();
-                bool success = Timer.TryReadLine(out name, secs);
+
+                bool success = Timer.TryReadLine(out name, seconds);
 
                 if (!success)
                 {
@@ -167,6 +167,11 @@ namespace MindSqueezer
                 Writer.WriteMessageOnNewLine(Messages.RightInput);
                 ColorChanger.DefaultColor();
                 System.Threading.Thread.Sleep(1000);
+
+                if (totalScore % 3 == 0 && seconds > 5000)
+                {
+                    seconds -= 2000;
+                }
             }
 
             ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);

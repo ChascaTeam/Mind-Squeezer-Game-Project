@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MindSqueezer
+﻿namespace MindSqueezer
 {
     public static class Messages
     {

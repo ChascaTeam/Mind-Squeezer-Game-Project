@@ -34,7 +34,7 @@ namespace MindSqueezer.Questions
 
         public override bool IsCorrectAnswer(string answer)
         {
-            return this.Answer.ToLower().Contains(answer.ToLower()) && answer.Length != 0;
+            return this.Answer.ToLower().Equals(answer.ToLower()) && answer.Length != 0;
         }
     }
 }
