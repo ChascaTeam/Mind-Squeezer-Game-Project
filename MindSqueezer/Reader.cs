@@ -12,19 +12,22 @@ namespace MindSqueezer
 
         public static string ReadNameCharLimit(int limit)
         {
-           string inputName = ReadLine();
+            string inputName = ReadLine();
 
-            while (inputName.Length == 0)
+            while (inputName.Length == 0 || inputName.Contains(" ") || inputName.Contains("\t"))
             {
+
                 ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
                 Writer.WriteMessageOnNewLine(Messages.EmptyName);
-                ColorChanger.ChangeColor(ConsoleColor.White, ConsoleColor.Black);                            
-                inputName = ReadLine();
+                ColorChanger.ChangeColor(ConsoleColor.White, ConsoleColor.Black);
+                                                  
+                inputName = ReadLine();               
             }
+            
 
             if (inputName.Length > limit)
             {
-                inputName = inputName.Substring(0, limit);                
+                inputName = inputName.Substring(0, limit);
             }
 
             return inputName;
