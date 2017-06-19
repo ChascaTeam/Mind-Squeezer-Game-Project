@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using MindSqueezer.Utilities;
 
 namespace MindSqueezer
@@ -10,6 +11,8 @@ namespace MindSqueezer
         public string QuestionText { get; protected set; }
 
         public string Answer { get; protected set; }
+
+        public int Seconds { get; protected set; }
 
         public virtual bool IsCorrectAnswer(string answer)
         {
@@ -39,5 +42,12 @@ namespace MindSqueezer
         {
             return questions.ToArray()[RandomGenerator.GetRandomNumber(questions.Count)];
         }
+
+        public static string[] GetRegistredQuestions()
+        {
+            return questions.ToArray();
+        }
+
+        public abstract void PrintSolution();
     }
 }

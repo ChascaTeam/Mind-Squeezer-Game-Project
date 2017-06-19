@@ -7,12 +7,13 @@ namespace MindSqueezer.Questions
 {
     class ReadSentenceInMatrixQuestion : Question
     {
-        public ReadSentenceInMatrixQuestion(string questionText)
+        public ReadSentenceInMatrixQuestion(string questionText, int seconds)
         {
             this.QuestionText = questionText;
+            this.Seconds = seconds;
         }
         public ReadSentenceInMatrixQuestion()
-            : this(Messages.QuestionTypeReadSentenceInMatrix)
+            : this(Messages.QuestionTypeReadSentenceInMatrix, 60)
         {
         }
 
@@ -288,6 +289,11 @@ namespace MindSqueezer.Questions
         public override bool IsCorrectAnswer(string answer)
         {
             return this.Answer.ToLower().Equals(answer.ToLower()) && answer.Length != 0;
+        }
+
+        public override void PrintSolution()
+        {
+            
         }
     }
 }

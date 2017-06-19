@@ -12,7 +12,7 @@ namespace MindSqueezer
 
         private static void Reader()
         {
-            while (true)
+            while (!_gotInput)
             {
                 _input = Console.ReadLine();
                 _gotInput = true;            
@@ -32,7 +32,7 @@ namespace MindSqueezer
                 {
                     break;
                 }
-                var level = OptionsMenu.TotalScore;
+
                 var cursorTop = Console.CursorTop;
                 var cursorLeft = Console.CursorLeft;
                 Console.SetCursorPosition(0, 0);
@@ -40,21 +40,9 @@ namespace MindSqueezer
                 ColorChanger.ChangeColor(ConsoleColor.Gray, ConsoleColor.Black);
                 Writer.WriteMessage("You have ");
                 ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
-                if (i > 9999)
-                {
-                    Writer.WriteMessage($"{i / 1000}");
-                }
-                else
-                {
-                    Writer.WriteMessage($"0{i / 1000}");
-                }
-                
+                Writer.WriteMessage($"{i / 1000:D2}");
                 ColorChanger.ChangeColor(ConsoleColor.Gray, ConsoleColor.Black);
                 Writer.WriteMessage(" seconds to answer.");
-                ColorChanger.DefaultColor();
-                Writer.WriteMessage(" Current Level: ");
-                ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
-                Writer.WriteMessage($"0{level/3 + 1}\n");
                 ColorChanger.DefaultColor();
 
                 Console.SetCursorPosition(cursorLeft, cursorTop);

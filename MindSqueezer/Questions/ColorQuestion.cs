@@ -10,12 +10,13 @@ namespace MindSqueezer.Questions
             "Gray", "White", "Yellow", "Green", "Blue", "Red"
         };
 
-        public ColorQuestion(string questionText)
+        public ColorQuestion(string questionText, int seconds)
         {
             this.QuestionText = questionText;
+            this.Seconds = seconds;
         }
         public ColorQuestion()
-            : this(Messages.QuestionTypeColorGuess)
+            : this(Messages.QuestionTypeColorGuess, 5)
         {
         }
         
@@ -35,6 +36,11 @@ namespace MindSqueezer.Questions
         public override bool IsCorrectAnswer(string answer)
         {
             return this.Answer.ToLower().Equals(answer.ToLower()) && answer.Length != 0;
+        }
+
+        public override void PrintSolution()
+        {
+            Writer.WriteMessageOnNewLine($"Dude are you color blind? IT'S FUCKING {Answer.ToUpper()}");
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using MindSqueezer.Questions;
 using MindSqueezer.Utilities;
 
 namespace MindSqueezer
@@ -77,17 +78,70 @@ namespace MindSqueezer
                     Start();
                     break;
                 case 3:
-                    GameRules();
+                    Tutorial();
                     break;
                 case 4:
-                    HighScores();
+                    GameRules();
                     break;
                 case 5:
-                    Credits();
+                    HighScores();
                     break;
                 case 6:
+                    Credits();
+                    break;
+                case 7:
                     Quit();
                     break;
+            }
+        }
+
+        private static void Tutorial()
+        {
+            foreach (var question in Question.GetRegistredQuestions())
+            {
+                Console.Clear();
+
+                ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
+                Writer.WriteMessageOnNewLine(".: Tutorial :. ");
+                ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
+                Writer.WriteMessageOnNewLine($"Game: {question.Substring(question.LastIndexOf('.') + 1)}\n\n");
+
+                ColorChanger.DefaultColor();
+
+                Question quest =
+                    Activator.CreateInstance(Type.GetType(question)) as Question;
+
+                Writer.WriteMessageOnNewLine(quest.QuestionText + '\n');
+                quest.GenerateQuestion();
+                Writer.WriteMessageOnNewLine();
+
+                ColorChanger.DefaultColor();
+
+                Writer.WriteMessage($"\n\nThe answer is ");
+                ColorChanger.ChangeColor(ConsoleColor.DarkGreen, ConsoleColor.Black);
+                if (question.Contains("Math"))
+                {
+                    Writer.WriteMessage(string.Join(" | ", (quest as MathMatrixQuestion).GetAnswers()));
+                }
+                else
+                {
+                    Writer.WriteMessage(quest.Answer);
+                }
+                DefaultColors();
+                Writer.WriteMessageOnNewLine(" ! Try to figure it yourself!");
+
+                ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);
+                Writer.WriteMessageOnNewLine("\n\nPress space to see the solution or any key to continue...");
+
+                if (Console.ReadKey().Key == ConsoleKey.Spacebar)
+                {
+                    Console.Clear();
+                    ColorChanger.ChangeColor(ConsoleColor.Blue, ConsoleColor.Black);
+                    quest.PrintSolution();
+                    ColorChanger.DefaultColor();
+                    Writer.WriteMessageOnNewLine("\n\nPress any key to continue...");
+                    Console.ReadKey();
+                }
             }
         }
 
@@ -121,7 +175,6 @@ namespace MindSqueezer
         private static void Start()
         {
             TotalScore = 0;
-            int seconds = 25000;
 
             while (true)
             {
@@ -130,15 +183,23 @@ namespace MindSqueezer
                 Question quest =
                     Activator.CreateInstance(Type.GetType(Question.GetRandomQuestionType())) as Question;
 
+                int seconds = quest.Seconds - TotalScore / 3;
+
                 string name; 
                 
                 Writer.WriteMessageOnNewLine();
+
+                Writer.WriteMessage(" Current Level: ");
+                ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
+                Writer.WriteMessage($"0{TotalScore / 3 + 1}\n");
+                ColorChanger.DefaultColor();
+
                 Writer.WriteMessageOnNewLine(quest.QuestionText);
 
                 quest.GenerateQuestion();
                 Writer.WriteMessageOnNewLine();
 
-                bool success = Timer.TryReadLine(out name, seconds);
+                bool success = Timer.TryReadLine(out name, seconds * 1000);
 
                 if (!success)
                 {
@@ -166,9 +227,8 @@ namespace MindSqueezer
                 Writer.WriteMessageOnNewLine(Messages.RightInput);
                 ColorChanger.DefaultColor();
                 
-                if (TotalScore % 3 == 0 && seconds > 5000)
+                if (TotalScore % 3 == 0)
                 {
-                    seconds -= 2000;
                     Writer.WriteMessageOnNewLine(Messages.LevelUp);
                     System.Threading.Thread.Sleep(1000);
                 }

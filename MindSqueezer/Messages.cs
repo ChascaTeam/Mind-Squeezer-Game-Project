@@ -7,6 +7,7 @@
         //Menus and sub menus content
         public const string MainMenu = "Choose menu option:" +
                                        "\n       Start" +
+                                       "\n      Tutorial" +
                                        "\n     Game Rules" +
                                        "\n     High Scores" +
                                        "\n      Credits" +

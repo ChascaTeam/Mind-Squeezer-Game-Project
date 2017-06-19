@@ -11,15 +11,17 @@ namespace MindSqueezer.Questions
         private const int Cols = 6;
         private readonly int[][] _matrix = new int[Rows][];
         private readonly List<string> _correctAnswers = new List<string>();
-        public MathMatrixQuestion(string equation)
+        public MathMatrixQuestion(string message, int seconds)
         {
-            this.QuestionText = String.Format(Messages.MathMatrixEquationCoordinates, equation);
+            this.QuestionText = message;
+            this.Seconds = seconds;
         }
 
         public MathMatrixQuestion()
+            : this(Messages.MathMatrixEquationCoordinates, 20)
         {
-            this.QuestionText = String.Format(Messages.MathMatrixEquationCoordinates);
         }
+
         public override void GenerateQuestion()
         {
             GenerateEquations();
@@ -109,7 +111,12 @@ namespace MindSqueezer.Questions
             return this._correctAnswers.Contains(answer) && answer.Length != 0;
         }
 
-        private static void PrintMatrix(int[][] matrix)
+        public string[] GetAnswers()
+        {
+            return this._correctAnswers.ToArray();
+        }
+
+        private void PrintMatrix(int[][] matrix, bool showAnswer = false)
         {
             Console.ForegroundColor = ConsoleColor.Gray;
             Console.WriteLine("- 1 2 3 4 5 6");
@@ -120,12 +127,24 @@ namespace MindSqueezer.Questions
                 Console.Write((char)(rowIndex + 65));
                 for (int colIndex = 0; colIndex < matrix[0].Length; colIndex++)
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    if (this._correctAnswers.Contains("" + (rowIndex + 'A') + " " + (colIndex + 1)))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                    }
                     Console.Write(" " + matrix[rowIndex][colIndex]);
                 }
                 Console.WriteLine();
                 Console.ResetColor();
             }
+        }
+
+        public override void PrintSolution()
+        {
+            PrintMatrix(_matrix, true);
         }
     }
 }

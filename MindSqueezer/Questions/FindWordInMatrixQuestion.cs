@@ -10,14 +10,16 @@ namespace MindSqueezer.Questions
     {
         private const int Rows = 4;
         private const int Cols = 5;
-
-        public FindWordInMatrixQuestion(string questionText)
+        private char[][] matrix;
+        public FindWordInMatrixQuestion(string questionText, int seconds)
         {
             this.QuestionText = questionText;
+            this.Seconds = seconds;
+            this.matrix = new char[Rows][];
         }
 
         public FindWordInMatrixQuestion() 
-            : this(Messages.QuestionTypeFindWordInMatrix)
+            : this(Messages.QuestionTypeFindWordInMatrix, 20)
         {
 
         }
@@ -110,6 +112,7 @@ namespace MindSqueezer.Questions
             }
 
             this.Answer = currentWord;
+            this.matrix = matrix;
         }
 
         public override bool IsCorrectAnswer(string answer)
@@ -117,7 +120,7 @@ namespace MindSqueezer.Questions
             return this.Answer.ToLower().Equals(answer.ToLower()) && answer.Length != 0;
         }
 
-        private static void PrintMatrix(char[][] matrix, int rotationType, int Rows, int Cols)
+        private void PrintMatrix(char[][] matrix, int rotationType, int Rows, int Cols)
         {
             if (rotationType == 1 || rotationType == 3)
             {
@@ -254,6 +257,11 @@ namespace MindSqueezer.Questions
             {
                 matrix[0][currCol] = currentWord[currCol];
             }
+        }
+
+        public override void PrintSolution()
+        {
+            //this.PrintMatrix(this.matrix, true);
         }
     }
 }
