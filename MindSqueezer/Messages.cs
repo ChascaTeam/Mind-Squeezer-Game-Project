@@ -22,7 +22,7 @@
                                         "\n\n1.ColorQuestion: \n\n" + ColorQuestionRules +
                                         "\n\n2.FindWordInMatrix: \n\n" + FindWordInMatrixRules +
                                         "\n\n3.MathMatrixQuestion: \n\n" + MathMatrixQuestionRules + 
-                                        "\n\n4.ReadSentenceInMatrixQuestion: \n\n" + ReadSentenceInMatrixQuestionRules; //TODO        
+                                        "\n\n4.ReadSentenceInMatrixQuestion: \n\n" + ReadSentenceInMatrixQuestionRules;       
 
         //High scores menu layout
         public const string HighScores = "\n            High Scores\n";
@@ -32,7 +32,6 @@
         public const string LongLine = "-----------------------------------";
 
         //Answer responses
-        
 
         public const string RightInput = "Correct!";
 
@@ -69,7 +68,7 @@ in ""row column"" format, where rows are from A to F, and columns are from 1 to 
         public const string ReadSentenceInMatrixQuestionRules =
             @"This time you have a rectangle, filled with simple sentence. The sentence can start 
 from each of the four corners in zig zag direction. Your task is to unwrap it. 
-Be quick, there is limited!";
+Be quick, time is limited!";
 
         public const string ColorQuestionRules =
             @"Here you will have to guess the color of the given word. Be careful, it can be tricky.";

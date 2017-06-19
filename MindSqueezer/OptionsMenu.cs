@@ -196,7 +196,29 @@ namespace MindSqueezer
         {
             Console.Clear();
 
-            Writer.WriteMessageOnNewLine(Messages.GameRules);
+            int indexOfOne = Messages.GameRules.IndexOf("1");
+            int indexOfTwo = Messages.GameRules.IndexOf("2");
+            int indexOfThree = Messages.GameRules.IndexOf("3");
+            int indexOfFour = Messages.GameRules.IndexOf("4");
+
+            ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
+            Writer.WriteMessage(Messages.GameRules.Substring(0, 17));
+            ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);
+            Writer.WriteMessage(Messages.GameRules.Substring(indexOfOne, 19));
+            ColorChanger.DefaultColor();
+            Writer.WriteMessage(Messages.GameRules.Substring(indexOfOne + 19, Messages.ColorQuestionRules.Length + 2));
+            ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);
+            Writer.WriteMessage(Messages.GameRules.Substring(indexOfTwo, 22));
+            ColorChanger.DefaultColor();
+            Writer.WriteMessage(Messages.GameRules.Substring(indexOfTwo + 22, Messages.FindWordInMatrixRules.Length + 2));
+            ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);
+            Writer.WriteMessage(Messages.GameRules.Substring(indexOfThree, 24));
+            ColorChanger.DefaultColor();
+            Writer.WriteMessage(Messages.GameRules.Substring(indexOfThree + 24, Messages.MathMatrixQuestionRules.Length + 2));
+            ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);
+            Writer.WriteMessage(Messages.GameRules.Substring(indexOfFour, 34));
+            ColorChanger.DefaultColor();
+            Writer.WriteMessageOnNewLine(Messages.GameRules.Substring(indexOfFour + 34, Messages.ReadSentenceInMatrixQuestionRules.Length));
 
             ReturnButton();
         }
