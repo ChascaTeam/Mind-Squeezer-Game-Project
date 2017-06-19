@@ -1,0 +1,5 @@
+D:\SoftUni\C# Fundamentals\C# Advanced\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\bin\Debug\MindSqueezer.Utilities.dll
+D:\SoftUni\C# Fundamentals\C# Advanced\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\bin\Debug\MindSqueezer.Utilities.pdb
+D:\SoftUni\C# Fundamentals\C# Advanced\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\obj\Debug\MindSqueezer.Utilities.csprojResolveAssemblyReference.cache
+D:\SoftUni\C# Fundamentals\C# Advanced\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\obj\Debug\MindSqueezer.Utilities.dll
+D:\SoftUni\C# Fundamentals\C# Advanced\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\obj\Debug\MindSqueezer.Utilities.pdb

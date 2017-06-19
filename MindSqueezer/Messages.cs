@@ -19,10 +19,10 @@
                                       "\n\nVasko Viktorov"; 
 
         public const string GameRules = "Question types:" +
-                                        "\n\n1.ColorQuestion:..." +
-                                        "\n\n2.FindWordInMatrix:..." +
-                                        "\n\n3.MathMatrixQuestion:..." +
-                                        "\n\n4.ReadSentenceInMatrixQuestion:..."; //TODO        
+                                        "\n\n1.ColorQuestion: \n\n" + ColorQuestionRules +
+                                        "\n\n2.FindWordInMatrix: \n\n" + FindWordInMatrixRules +
+                                        "\n\n3.MathMatrixQuestion: \n\n" + MathMatrixQuestionRules + 
+                                        "\n\n4.ReadSentenceInMatrixQuestion: \n\n" + ReadSentenceInMatrixQuestionRules; //TODO        
 
         //High scores menu layout
         public const string HighScores = "\n            High Scores\n";
@@ -56,10 +56,23 @@
 
         public const string EmptyName = "Name cannot be empty!";
 
+        public const string FindWordInMatrixRules = 
+            @"In this game you are given a rectangle, filled with letters and your task is to 
+find the hidden word of four or five letters. The word can be placed horizontally, 
+vertically or diagonally, in any direction.";
 
+        public const string MathMatrixQuestionRules =
+            @"Here we will test your math skills. You will be given a task where you have to find 
+the coordinates of unknown X in rectangle, filled with digits. The answer should be 
+in ""row column"" format, where rows are from A to F, and columns are from 1 to 6.";
 
+        public const string ReadSentenceInMatrixQuestionRules =
+            @"This time you have a rectangle, filled with simple sentence. The sentence can start 
+from each of the four corners in zig zag direction. Your task is to unwrap it. 
+Be quick, there is limited!";
 
-
+        public const string ColorQuestionRules =
+            @"Here you will have to guess the color of the given word. Be careful, it can be tricky.";
 
     }
 }
