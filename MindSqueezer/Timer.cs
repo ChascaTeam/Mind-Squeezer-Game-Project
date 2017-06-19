@@ -13,7 +13,7 @@ namespace MindSqueezer
         private static void Reader()
         {
             while (true)
-            {                
+            {
                 _input = Console.ReadLine();
                 _gotInput = true;            
             }
@@ -42,8 +42,12 @@ namespace MindSqueezer
                 ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
                 Writer.WriteMessage($"{i / 1000}");
                 ColorChanger.ChangeColor(ConsoleColor.Gray, ConsoleColor.Black);
-                Writer.WriteMessage(" seconds to answer.\n");
-                ColorChanger.ChangeColor(ConsoleColor.White, ConsoleColor.Black);
+                Writer.WriteMessage(" seconds to answer.");
+                ColorChanger.DefaultColor();
+                Writer.WriteMessage(" Current Level: ");
+                ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
+                Writer.WriteMessage($"{OptionsMenu.TotalScore + 1}\n");
+                ColorChanger.DefaultColor();
 
                 Console.SetCursorPosition(cursorLeft, cursorTop);
                 Thread.Sleep(500);

@@ -7,7 +7,7 @@ namespace MindSqueezer
 {
     public static class OptionsMenu
     {
-
+        public static int TotalScore;
         private static List<string> menu = Messages.MainMenu.Split('\n').ToList();
 
         public static void Menu()
@@ -120,7 +120,7 @@ namespace MindSqueezer
 
         private static void Start()
         {
-            var totalScore = 0;
+            TotalScore = 0;
             int seconds = 25000;
 
             while (true)
@@ -160,25 +160,25 @@ namespace MindSqueezer
                 }
 
                 Writer.WriteMessageOnNewLine();
-                totalScore = Score.Add(totalScore);
-                Writer.WriteMessageOnNewLine($"Total score: {totalScore}");
+                TotalScore = Score.Add(TotalScore);
+                Writer.WriteMessageOnNewLine($"Total score: {TotalScore}");
                 ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
                 Writer.WriteMessageOnNewLine(Messages.RightInput);
                 ColorChanger.DefaultColor();
                 System.Threading.Thread.Sleep(1000);
 
-                if (totalScore % 3 == 0 && seconds > 5000)
+                if (TotalScore % 3 == 0 && seconds > 5000)
                 {
                     seconds -= 2000;
                 }
             }
 
             ColorChanger.ChangeColor(ConsoleColor.Yellow, ConsoleColor.Black);
-            Writer.WriteMessageOnNewLine($"Your score: {totalScore}");
+            Writer.WriteMessageOnNewLine($"Your score: {TotalScore}");
             ColorChanger.DefaultColor();
             System.Threading.Thread.Sleep(500);
 
-            if (Score.CheckIfTopScore(totalScore))
+            if (Score.CheckIfTopScore(TotalScore))
             {
                 Writer.WriteMessageOnNewLine();
                 ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
@@ -186,7 +186,7 @@ namespace MindSqueezer
                 ColorChanger.DefaultColor();
                 Writer.WriteMessage(Messages.WriteYourName);
 
-                Score.IsInTheTop(totalScore);
+                Score.IsInTheTop(TotalScore);
             }
             
             ReturnButton();
