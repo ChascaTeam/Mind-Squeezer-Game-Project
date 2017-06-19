@@ -7,10 +7,10 @@ namespace MindSqueezer.Questions
 {
     public class MathMatrixQuestion : Question
     {
-        private const int rows = 6;
-        private const int cols = 6;
-        private int[][] matrix = new int[rows][];
-        private List<string> correctAnswers = new List<string>();
+        private const int Rows = 6;
+        private const int Cols = 6;
+        private readonly int[][] _matrix = new int[Rows][];
+        private readonly List<string> _correctAnswers = new List<string>();
         public MathMatrixQuestion(string equation)
         {
             this.QuestionText = String.Format(Messages.MathMatrixEquationCoordinates, equation);
@@ -38,13 +38,13 @@ namespace MindSqueezer.Questions
             PrintEquation(equation);
 
             //Calculating the equation.
-            int result = CalculateEquation(equation);
+            int result = Calculator.CalculateEquation(equation);
 
             //Populating the matrix containing at least one occurrence of the result.
             PopulateMatrix(result);
 
             //Printing the matrix.
-            PrintMatrix(matrix);
+            PrintMatrix(_matrix);
 
 
         }
@@ -65,30 +65,30 @@ namespace MindSqueezer.Questions
 
         private void InitializeMatrix()
         {
-            for (int rowIndex = 0; rowIndex < rows; rowIndex++)
+            for (int rowIndex = 0; rowIndex < Rows; rowIndex++)
             {
-                matrix[rowIndex] = new int[cols];
+                _matrix[rowIndex] = new int[Cols];
             }
         }
 
         private void PopulateMatrix(int result)
         {
-            int row = RandomGenerator.GetRandomNumber(matrix.Length);
-            int col = RandomGenerator.GetRandomNumber(matrix[0].Length);
+            int row = RandomGenerator.GetRandomNumber(_matrix.Length);
+            int col = RandomGenerator.GetRandomNumber(_matrix[0].Length);
 
-            matrix[row][col] = result;
-            correctAnswers.Add($"{(char)(row+65)} {col+1}");
-            for (int rowIndex = 0; rowIndex < matrix.Length; rowIndex++)
+            _matrix[row][col] = result;
+            _correctAnswers.Add($"{(char)(row+65)} {col+1}");
+            for (int rowIndex = 0; rowIndex < _matrix.Length; rowIndex++)
             {
-                for (int colIndex = 0; colIndex < matrix[0].Length; colIndex++)
+                for (int colIndex = 0; colIndex < _matrix[0].Length; colIndex++)
                 {
                     if (rowIndex != row && colIndex != col)
                     {
                         int numToAdd = RandomGenerator.GetRandomNumber(10);
-                        matrix[rowIndex][colIndex] = numToAdd;
+                        _matrix[rowIndex][colIndex] = numToAdd;
                         if (numToAdd == result)
                         {
-                            correctAnswers.Add($"{(char)(rowIndex + 65)} {colIndex + 1}");
+                            _correctAnswers.Add($"{(char)(rowIndex + 65)} {colIndex + 1}");
                         }
                     }
                 }
@@ -102,16 +102,11 @@ namespace MindSqueezer.Questions
             Writer.WriteMessageOnNewLine();
         }
 
-        private static int CalculateEquation(string equation)
-        {
-            DataTable dt = new DataTable();
-            var v = int.Parse(dt.Compute(equation, "").ToString());
-            return v;
-        }
+        
 
         public override bool IsCorrectAnswer(string answer)
         {
-            return this.correctAnswers.Contains(answer) && answer.Length != 0;
+            return this._correctAnswers.Contains(answer) && answer.Length != 0;
         }
 
         private static void PrintMatrix(int[][] matrix)

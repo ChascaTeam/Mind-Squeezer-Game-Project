@@ -13,10 +13,10 @@
                                        "\n       Quit";
 
         public const string Credits = "This game was made by:" +
-                                      "\n\nDimana Dimitrova" +
-                                      "\n\nKonstantin Lupov" +
-                                      "\n\nMartin Dachev" +
-                                      "\n\nVasko Viktorov"; 
+                                      "\n\nDimana Dimitrova - FindWordInMatrix Game" +
+                                      "\n\nKonstantin Lupov - MathMatrix Game" +
+                                      "\n\nMartin Dachev - ColorQuestion Game" +
+                                      "\n\nVasko Viktorov - ReadSentenceInMatrix Game"; 
 
         public const string GameRules = "Question types:" +
                                         "\n\n1.ColorQuestion: \n\n" + ColorQuestionRules +

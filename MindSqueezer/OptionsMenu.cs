@@ -130,7 +130,7 @@ namespace MindSqueezer
                 Question quest =
                     Activator.CreateInstance(Type.GetType(Question.GetRandomQuestionType())) as Question;
 
-                string name = string.Empty; 
+                string name; 
                 
                 Writer.WriteMessageOnNewLine();
                 Writer.WriteMessageOnNewLine(quest.QuestionText);

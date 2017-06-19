@@ -6,29 +6,29 @@ namespace MindSqueezer
 {
     class Timer
     {
-        private static Thread inputThread;
-        private static string input;
-        private static bool gotInput;
+        private static Thread _inputThread;
+        private static string _input;
+        private static bool _gotInput;
 
-        private static void reader()
+        private static void Reader()
         {
             while (true)
             {                
-                input = Console.ReadLine();
-                gotInput = true;            
+                _input = Console.ReadLine();
+                _gotInput = true;            
             }
         }
       
         public static bool TryReadLine(out string line, int timeOutMillisecs = Timeout.Infinite)
         {         
-            inputThread = new Thread(reader);
-            gotInput = false;
-            inputThread.IsBackground = true;
-            inputThread.Start();
+            _inputThread = new Thread(Reader);
+            _gotInput = false;
+            _inputThread.IsBackground = true;
+            _inputThread.Start();
           
             for (int i = timeOutMillisecs; i >= 0 ; i -= 500)
             {
-                if (gotInput)
+                if (_gotInput)
                 {
                     break;
                 }
@@ -49,17 +49,17 @@ namespace MindSqueezer
                 Thread.Sleep(500);
             }
 
-            if (gotInput)
+            if (_gotInput)
             {
-                line = input;
-                inputThread.Abort();
+                line = _input;
+                _inputThread.Abort();
             }
             else
             {
                 line = null;
-                inputThread.Abort();
+                _inputThread.Abort();
             }               
-            return gotInput;
+            return _gotInput;
         }
 
     }
