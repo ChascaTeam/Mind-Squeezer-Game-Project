@@ -165,11 +165,16 @@ namespace MindSqueezer
                 ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
                 Writer.WriteMessageOnNewLine(Messages.RightInput);
                 ColorChanger.DefaultColor();
-                System.Threading.Thread.Sleep(1000);
-
+                
                 if (TotalScore % 3 == 0 && seconds > 5000)
                 {
                     seconds -= 2000;
+                    Writer.WriteMessageOnNewLine(Messages.LevelUp);
+                    System.Threading.Thread.Sleep(1000);
+                }
+                else
+                {
+                    System.Threading.Thread.Sleep(1000);
                 }
             }
 

@@ -32,21 +32,29 @@ namespace MindSqueezer
                 {
                     break;
                 }
-
+                var level = OptionsMenu.TotalScore;
                 var cursorTop = Console.CursorTop;
                 var cursorLeft = Console.CursorLeft;
                 Console.SetCursorPosition(0, 0);
-
+               
                 ColorChanger.ChangeColor(ConsoleColor.Gray, ConsoleColor.Black);
                 Writer.WriteMessage("You have ");
                 ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
-                Writer.WriteMessage($"{i / 1000}");
+                if (i > 9999)
+                {
+                    Writer.WriteMessage($"{i / 1000}");
+                }
+                else
+                {
+                    Writer.WriteMessage($"0{i / 1000}");
+                }
+                
                 ColorChanger.ChangeColor(ConsoleColor.Gray, ConsoleColor.Black);
                 Writer.WriteMessage(" seconds to answer.");
                 ColorChanger.DefaultColor();
                 Writer.WriteMessage(" Current Level: ");
                 ColorChanger.ChangeColor(ConsoleColor.Green, ConsoleColor.Black);
-                Writer.WriteMessage($"{OptionsMenu.TotalScore + 1}\n");
+                Writer.WriteMessage($"0{level/3 + 1}\n");
                 ColorChanger.DefaultColor();
 
                 Console.SetCursorPosition(cursorLeft, cursorTop);

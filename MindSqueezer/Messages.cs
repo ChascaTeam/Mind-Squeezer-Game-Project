@@ -37,6 +37,8 @@
 
         public const string TimeUp = "Time's up!";
 
+        public const string LevelUp = "Level up!";
+
         //Questions
         public const string QuestionTypeColorGuess = "What color is the word?";
 
@@ -54,7 +56,8 @@
         public const string WriteYourName = "Write your name (20 chars max): ";
 
         public const string EmptyName = "Name cannot be empty!";
-
+       
+        //Game Rules
         public const string FindWordInMatrixRules = 
             @"In this game you are given a rectangle, filled with letters and your task is to 
 find the hidden word of four or five letters. The word can be placed horizontally, 
