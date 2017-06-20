@@ -32,7 +32,7 @@ namespace MindSqueezer
                     }
                     if (current == pointer)
                     {
-                        if (current == 6)
+                        if (current == 7)
                         {
                             ColorChanger.ChangeColor(ConsoleColor.Red, ConsoleColor.Black);
                             Writer.WriteMessageOnNewLine($"{line} <");
@@ -56,11 +56,11 @@ namespace MindSqueezer
                 switch (key.Key)
                 {
                     case ConsoleKey.Escape:
-                        pointer = 6;
+                        pointer = 7;
                         break;
                     case ConsoleKey.UpArrow:
                         if (pointer > 2) pointer--;
-                        else pointer = 6;
+                        else pointer = 7;
                         break;
                     case ConsoleKey.DownArrow:
                         if (pointer < menu.Count()) pointer++;

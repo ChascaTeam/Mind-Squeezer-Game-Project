@@ -8,3 +8,8 @@ C:\Users\USER\Documents\GitHub\Mind-Squeezer-Game-Project\MindSqueezer.Utilities
 C:\Users\USER\Documents\GitHub\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\obj\Debug\MindSqueezer.Utilities.csprojResolveAssemblyReference.cache
 C:\Users\USER\Documents\GitHub\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\obj\Debug\MindSqueezer.Utilities.dll
 C:\Users\USER\Documents\GitHub\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\obj\Debug\MindSqueezer.Utilities.pdb
+C:\Users\Konstantin\Documents\GitHub\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\bin\Debug\MindSqueezer.Utilities.dll
+C:\Users\Konstantin\Documents\GitHub\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\bin\Debug\MindSqueezer.Utilities.pdb
+C:\Users\Konstantin\Documents\GitHub\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\obj\Debug\MindSqueezer.Utilities.csprojResolveAssemblyReference.cache
+C:\Users\Konstantin\Documents\GitHub\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\obj\Debug\MindSqueezer.Utilities.dll
+C:\Users\Konstantin\Documents\GitHub\Mind-Squeezer-Game-Project\MindSqueezer.Utilities\obj\Debug\MindSqueezer.Utilities.pdb
