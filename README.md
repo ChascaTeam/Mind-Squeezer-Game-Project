@@ -15,7 +15,7 @@ Martin Dacev – Tutorial sub menu logic, logic behind the Color Guess question 
 Vasko Viktorov – High Scores sub menu logic, logic behind the Unwrap the sentence question type.
 
 
-Everything other (and even parts of the written above) was a team effort (except for Patrik Stanev).   
+Everything other (and even parts of the written above) was a team effort.   
 
 ## Game explanation:
 
@@ -43,4 +43,4 @@ Unwrap The Sentence – gives matrix with a wrapped sentence in it. The player h
 and write it in the answer field. The given time is high.
 
 
-## The game can be started from MindSqueezer.sln file.
+## The game can be started from MindSqueezer.sln (with ctr+F5).
