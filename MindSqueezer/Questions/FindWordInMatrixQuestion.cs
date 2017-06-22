@@ -261,7 +261,9 @@ namespace MindSqueezer.Questions
 
         public override void PrintSolution()
         {
-            //this.PrintMatrix(this.matrix, true);
+            
+            Writer.WriteMessageOnNewLine($"The Correct Answer is:\n\n{Answer.ToUpper()}");
         }
+        
     }
 }

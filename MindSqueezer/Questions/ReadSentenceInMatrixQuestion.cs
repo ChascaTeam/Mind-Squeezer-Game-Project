@@ -293,7 +293,7 @@ namespace MindSqueezer.Questions
 
         public override void PrintSolution()
         {
-            
+            Writer.WriteMessageOnNewLine($"The Correct Answer is:\n\n{Answer.ToUpper()}");
         }
     }
 }

@@ -40,7 +40,7 @@ namespace MindSqueezer.Questions
 
         public override void PrintSolution()
         {
-            Writer.WriteMessageOnNewLine($"Dude are you color blind? IT'S FUCKING {Answer.ToUpper()}");
+            Writer.WriteMessageOnNewLine($"The Correct Answer is:\n\n{Answer.ToUpper()}");
         }
     }
 }

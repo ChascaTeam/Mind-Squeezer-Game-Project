@@ -17,7 +17,6 @@ namespace MindSqueezer
         public static void WriteMessageOnNewLine()
         {
             Console.WriteLine();
-        }
-        
+        }            
     }
 }

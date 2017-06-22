@@ -115,7 +115,7 @@ namespace MindSqueezer
                 var name = highScores[i].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)[1];
                 var score = int.Parse(highScores[i].Split()[0]);
 
-                Writer.WriteMessageOnNewLine($"|{i + 1,3}  |{score,4} | {name,-20}|");
+                Writer.WriteMessageOnNewLine($"           |{i + 1,3}  |{score,4} | {name,-20}|");
             }
         }
 

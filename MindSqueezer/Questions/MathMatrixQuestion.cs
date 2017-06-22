@@ -144,7 +144,8 @@ namespace MindSqueezer.Questions
 
         public override void PrintSolution()
         {
-            PrintMatrix(_matrix, true);
+            Writer.WriteMessageOnNewLine(Messages.MathMatrixAdditionalInfo);
+            Writer.WriteMessage($"| {string.Join(" | ", GetAnswers())} |");
         }
     }
 }
