@@ -64,9 +64,9 @@
 
         public const string EnterTopThree = "Congratulations! You've made it to the top 3!";
 
-        public const string WriteYourName = "Write your name (20 chars max): ";
+        public const string WriteYourName = "Write your name (20 chars max, no spaces allowed): ";
 
-        public const string EmptyName = "Name cannot be empty!";
+        public const string EmptyName = "Invalid name!";
 
         //Game Rules
         public const string Rules =
